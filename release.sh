@@ -43,6 +43,13 @@ for os in "${OS[@]}"; do
   done
 done
 
+declare -A SHA256SUMS
+for archive in "$ARTIFACTS_DIR"/*.tar.gz; do
+  sha=$(sha256sum "$archive" | awk '{print $1}')
+  filename=$(basename "$archive")
+  SHA256SUMS["$filename"]=$sha
+done
+
 # Create Krew plugin manifest
 MANIFEST_FILE="$PLUGINS_DIR/$PLUGIN_NAME.yaml"
 mkdir -p "$PLUGINS_DIR"
@@ -55,18 +62,21 @@ metadata:
 spec:
   version: "$VERSION"
   homepage: "$REPO_URL"
-  shortDescription: View capacity in your cluster
+  shortDescription: a kubectl plugin written by vrabbi
   platforms:
 EOF
 
 for os in "${OS[@]}"; do
   for arch in "${ARCHS[@]}"; do
+    ARCHIVE_NAME="${BINARY_NAME}-${VERSION}-${os}-${arch}.tar.gz"
+    SHA="${SHA256SUMS[$ARCHIVE_NAME]}"
     cat <<EOF >> "$MANIFEST_FILE"
   - selector:
       matchLabels:
         os: "$os"
         arch: "$arch"
     uri: "$REPO_URL/releases/download/$PLUGIN_NAME-$VERSION/${BINARY_NAME}-${VERSION}-${os}-${arch}.tar.gz"
+    sha256: "$SHA"
     bin: "$BINARY_NAME"
     files:
       - from: "$BINARY_NAME"
@@ -74,7 +84,6 @@ for os in "${OS[@]}"; do
 EOF
   done
 done
-exit 1
 # Create GitHub tag and release with GH CLI
 RELEASE_TAG="${PLUGIN_NAME}-${VERSION}"
 gh release create "$RELEASE_TAG" "$ARTIFACTS_DIR"/*.tar.gz --title "$RELEASE_TAG" --notes "Release of $PLUGIN_NAME version $VERSION"
