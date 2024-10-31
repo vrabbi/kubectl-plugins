@@ -5,6 +5,7 @@ metadata:
 spec:
   version: "0.0.1"
   homepage: "https://github.com/vrabbi/kubectl-plugins"
+  shortDescription: View capacity in your cluster
   platforms:
   - selector:
       matchLabels:

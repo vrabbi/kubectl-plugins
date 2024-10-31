@@ -55,6 +55,7 @@ metadata:
 spec:
   version: "$VERSION"
   homepage: "$REPO_URL"
+  shortDescription: View capacity in your cluster
   platforms:
 EOF
 
@@ -73,7 +74,7 @@ for os in "${OS[@]}"; do
 EOF
   done
 done
-
+exit 1
 # Create GitHub tag and release with GH CLI
 RELEASE_TAG="${PLUGIN_NAME}-${VERSION}"
 gh release create "$RELEASE_TAG" "$ARTIFACTS_DIR"/*.tar.gz --title "$RELEASE_TAG" --notes "Release of $PLUGIN_NAME version $VERSION"
