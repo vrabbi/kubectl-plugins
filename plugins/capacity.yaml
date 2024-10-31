@@ -1,0 +1,62 @@
+apiVersion: krew.googlecontainertools.github.com/v1alpha2
+kind: Plugin
+metadata:
+  name: capacity
+spec:
+  version: "0.0.1"
+  homepage: "https://github.com/vrabbi/kubectl-plugins"
+  platforms:
+  - selector:
+      matchLabels:
+        os: "linux"
+        arch: "amd64"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-0.0.1/kubectl-capacity-0.0.1-linux-amd64.tar.gz"
+    bin: "kubectl-capacity"
+    files:
+      - from: "kubectl-capacity"
+        to: "kubectl-capacity"
+  - selector:
+      matchLabels:
+        os: "linux"
+        arch: "arm64"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-0.0.1/kubectl-capacity-0.0.1-linux-arm64.tar.gz"
+    bin: "kubectl-capacity"
+    files:
+      - from: "kubectl-capacity"
+        to: "kubectl-capacity"
+  - selector:
+      matchLabels:
+        os: "darwin"
+        arch: "amd64"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-0.0.1/kubectl-capacity-0.0.1-darwin-amd64.tar.gz"
+    bin: "kubectl-capacity"
+    files:
+      - from: "kubectl-capacity"
+        to: "kubectl-capacity"
+  - selector:
+      matchLabels:
+        os: "darwin"
+        arch: "arm64"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-0.0.1/kubectl-capacity-0.0.1-darwin-arm64.tar.gz"
+    bin: "kubectl-capacity"
+    files:
+      - from: "kubectl-capacity"
+        to: "kubectl-capacity"
+  - selector:
+      matchLabels:
+        os: "windows"
+        arch: "amd64"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-0.0.1/kubectl-capacity-0.0.1-windows-amd64.tar.gz"
+    bin: "kubectl-capacity"
+    files:
+      - from: "kubectl-capacity"
+        to: "kubectl-capacity"
+  - selector:
+      matchLabels:
+        os: "windows"
+        arch: "arm64"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-0.0.1/kubectl-capacity-0.0.1-windows-arm64.tar.gz"
+    bin: "kubectl-capacity"
+    files:
+      - from: "kubectl-capacity"
+        to: "kubectl-capacity"
