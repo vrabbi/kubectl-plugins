@@ -1,0 +1,62 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+- path: upstream
+  contents:
+  - path: .
+    git: 
+      url: https://github.com/kubernetes-sigs/krew-index
+      ref: origin/master
+    newRootPath: plugins
+    includePaths:
+    - plugins/access-matrix.yaml
+    - plugins/allctx.yaml
+    - plugins/cert-manager.yaml
+    - plugins/creyaml.yaml
+    - plugins/ctx.yaml
+    - plugins/deprecations.yaml
+    - plugins/df-pv.yaml
+    - plugins/eksporter.yaml
+    - plugins/exec-cronjob.yaml
+    - plugins/grep.yaml
+    - plugins/konfig.yaml
+    - plugins/ns.yaml
+    - plugins/rabbitmq.yaml
+    - plugins/split-yaml.yaml
+    - plugins/starboard.yaml
+    - plugins/support-bundle.yaml
+    - plugins/tree.yaml
+    - plugins/unused-volumes.yaml
+    - plugins/view-cert.yaml
+    - plugins/view-serviceaccount-kubeconfig.yaml
+    - plugins/view-secret.yaml
+    - plugins/modify-secret.yaml
+    - plugins/who-can.yaml
+    - plugins/whoami.yaml
+    - plugins/rolesum.yaml
+    - plugins/resource-versions.yaml
+    - plugins/outdated.yaml
+    - plugins/node-shell.yaml
+    - plugins/neat.yaml
+    - plugins/get-all.yaml
+    - plugins/mc.yaml
+    - plugins/ipick.yaml
+    - plugins/minio.yaml
+    - plugins/oidc-login.yaml
+    - plugins/neat.yaml
+    - plugins/gadget.yaml
+    - plugins/neat.yaml
+    - plugins/config-cleanup.yaml
+    - plugins/config-import.yaml
+    - plugins/edit-status.yaml
+    - plugins/node-logs.yaml
+    - plugins/np-viewer.yaml
+    - plugins/resource-capacity.yaml
+    - plugins/validate.yaml
+    - plugins/kyverno.yaml
+    - plugins/history.yaml
+    - plugins/aws-auth.yaml
+    - plugins/aks.yaml
+    - plugins/topology.yaml
+    - plugins/view-webhook.yaml
+

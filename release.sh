@@ -86,6 +86,8 @@ EOF
 done
 # Create GitHub tag and release with GH CLI
 RELEASE_TAG="${PLUGIN_NAME}-${VERSION}"
+vendir sync
+cp upstream/* plugins/
 gh release create "$RELEASE_TAG" "$ARTIFACTS_DIR"/*.tar.gz --title "$RELEASE_TAG" --notes "Release of $PLUGIN_NAME version $VERSION"
 rm -rf "$ARTIFACTS_DIR"/*.tar.gz
 git add .

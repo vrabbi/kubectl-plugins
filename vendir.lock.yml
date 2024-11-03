@@ -1,0 +1,9 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: new version v1.31.0 of oidc-login (#4184)
+      sha: 9b6f2621381a8b944740cc838638caec04254096
+    path: .
+  path: upstream
+kind: LockConfig
