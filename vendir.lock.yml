@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: new version v1.31.0 of oidc-login (#4184)
-      sha: 9b6f2621381a8b944740cc838638caec04254096
+      commitTitle: new version 0.20.1 of view-allocations (#4189)
+      sha: 4776760b219755e18865d075c9244a59414f17a1
     path: .
   path: upstream
 kind: LockConfig
