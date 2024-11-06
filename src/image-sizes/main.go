@@ -10,11 +10,13 @@ import (
     "regexp"
     "sync"
     "path/filepath"
+    "strings"
 
     "gopkg.in/yaml.v2"
     "k8s.io/client-go/kubernetes"
     "k8s.io/client-go/rest"
     "k8s.io/client-go/tools/clientcmd"
+    "k8s.io/api/core/v1"
     metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -63,7 +65,7 @@ func init() {
         fmt.Fprintf(os.Stderr, "Usage: kubectl image-sizes [flags]\n\n")
         fmt.Fprintf(os.Stderr, "This command outputs image sizes for containers per pod, namespace or cluster wide.\n\n")
         fmt.Fprintf(os.Stderr, "Flags:\n")
-	fmt.Fprintf(os.Stderr, "  -A, --all-namespaces          Query all namespaces\n")
+        fmt.Fprintf(os.Stderr, "  -A, --all-namespaces          Query all namespaces\n")
         fmt.Fprintf(os.Stderr, "  -n, --namespace <namespace>   Namespace to use\n")
         fmt.Fprintf(os.Stderr, "  -o, --output <format>         Output format: table, json, yaml\n")
         fmt.Fprintf(os.Stderr, "  -p, --pod <pod name>          Specific pod name to query\n")
@@ -103,11 +105,11 @@ func main() {
         }
         reports = append(reports, report)
     } else {
-        ns := namespace
         if allNamespaces {
-            ns = metav1.NamespaceAll
+            reports, err = getNamespaceImageReports(clientset) // Removed the string argument here
+        } else {
+            reports, err = getNamespaceImageReportsForSingleNamespace(clientset, namespace) // Separate function for single namespace
         }
-        reports, err = getNamespaceImageReports(clientset, ns)
         if err != nil {
             fmt.Fprintf(os.Stderr, "Error retrieving namespace data: %v\n", err)
             os.Exit(1)
@@ -148,8 +150,14 @@ func getPodImageReport(clientset *kubernetes.Clientset, namespace, podName strin
     }
 
     report := PodImageReport{PodName: pod.Name, Namespace: pod.Namespace}
+    totalContainers := len(pod.Spec.InitContainers) + len(pod.Spec.Containers)
+    currentContainer := 0
+
     for _, container := range append(pod.Spec.InitContainers, pod.Spec.Containers...) {
-        imageInfo, err := getImageDetails(container.Image, container.Name)
+        currentContainer++
+        fmt.Printf("(%d/%d) Processing Container Image %s\n", currentContainer, totalContainers, container.Image)
+
+        imageInfo, err := getImageDetails(container.Image, container.Name, pod, clientset) // Added clientset here
         if err != nil {
             return PodImageReport{}, fmt.Errorf("error retrieving image details for %s: %w", container.Image, err)
         }
@@ -158,28 +166,72 @@ func getPodImageReport(clientset *kubernetes.Clientset, namespace, podName strin
     return report, nil
 }
 
-func getNamespaceImageReports(clientset *kubernetes.Clientset, ns string) ([]PodImageReport, error) {
-    pods, err := clientset.CoreV1().Pods(ns).List(context.TODO(), metav1.ListOptions{})
-    if err != nil {
-        return nil, err
-    }
-
-    var reports []PodImageReport
-    for _, pod := range pods.Items {
-        report, err := getPodImageReport(clientset, pod.Namespace, pod.Name)
-        if err != nil {
-            fmt.Fprintf(os.Stderr, "Warning: skipping pod %s due to error: %v\n", pod.Name, err)
-            continue
-        }
-        reports = append(reports, report)
-    }
-    return reports, nil
-}
-
-func getImageDetails(imageURI, containerName string) (PodImageInfo, error) {
+func getImageDetails(imageURI, containerName string, pod *v1.Pod, clientset *kubernetes.Clientset) (PodImageInfo, error) {
     cleanedImage, tag, shaDigest := parseImageURI(imageURI)
 
-    cacheKey := cleanedImage + ":" + tag + "@" + shaDigest
+    var fullImage string
+    if shaDigest != "" {
+        // If the image URI already includes a SHA digest, use it directly
+	fullImage = cleanedImage + "@sha256:" + shaDigest
+    } else {
+        // For images with a tag, build the image reference with the tag
+        fullImage = cleanedImage
+        if tag != "" && tag != "N/A" {
+            fullImage += ":" + tag
+        }
+
+        // Retrieve the node's architecture where the pod is running
+        nodeName := pod.Spec.NodeName
+        node, err := clientset.CoreV1().Nodes().Get(context.TODO(), nodeName, metav1.GetOptions{})
+        if err != nil {
+            return PodImageInfo{}, fmt.Errorf("failed to get node information for pod %s: %v", pod.Name, err)
+        }
+        nodeArch := node.Status.NodeInfo.Architecture
+
+        // Get the manifest list for the image
+        cmd := exec.Command("docker", "manifest", "inspect", fullImage)
+        output, err := cmd.CombinedOutput()
+        if err != nil || !isMultiArch(output) {
+            // Fallback: if it's not multi-arch, or if inspection fails, use the tag directly
+            imageInfo, err := inspectSingleArchImage(fullImage, containerName, cleanedImage, tag)
+            if err == nil {
+                imageInfo.ShaDigest = extractShaDigest(fullImage, output) // Correctly extract SHA digest from output
+            }
+            return imageInfo, err
+        }
+
+        // Parse the manifest list to find the appropriate architecture if it’s multi-arch
+        var manifestList struct {
+            Manifests []struct {
+                Platform struct {
+                    Architecture string `json:"architecture"`
+                } `json:"platform"`
+                Digest string `json:"digest"`
+            } `json:"manifests"`
+        }
+        err = json.Unmarshal(output, &manifestList)
+        if err != nil {
+            return PodImageInfo{}, fmt.Errorf("failed to parse manifest list for image %s: %v", fullImage, err)
+        }
+
+        var archDigest string
+        for _, manifest := range manifestList.Manifests {
+            if manifest.Platform.Architecture == nodeArch {
+                archDigest = manifest.Digest
+                break
+            }
+        }
+        if archDigest == "" {
+            return PodImageInfo{}, fmt.Errorf("no matching architecture (%s) found for image %s", nodeArch, fullImage)
+        }
+
+        // Use the architecture-specific SHA digest
+        shaDigest = archDigest
+        fullImage = cleanedImage + "@" + shaDigest
+    }
+
+    // Check cache to avoid repeated inspections
+    cacheKey := fullImage
     cacheMutex.Lock()
     if cachedInfo, found := imageCache[cacheKey]; found {
         cacheMutex.Unlock()
@@ -187,17 +239,46 @@ func getImageDetails(imageURI, containerName string) (PodImageInfo, error) {
     }
     cacheMutex.Unlock()
 
-    fullImage := cleanedImage
-    if shaDigest != "" {
-        fullImage += "@sha256:" + shaDigest
-    } else if tag != "" && tag != "N/A" {
-        fullImage += ":" + tag
+    // Perform the inspection and cache the result
+    imageInfo, err := inspectSingleArchImage(fullImage, containerName, cleanedImage, tag)
+    if err != nil {
+        return PodImageInfo{}, err
     }
 
+    // Only store the SHA digest, not the full URI in the output
+    imageInfo.ShaDigest = shaDigest
+
+    // Cache the inspected result
+    cacheMutex.Lock()
+    imageCache[cacheKey] = imageInfo
+    cacheMutex.Unlock()
+
+    return imageInfo, nil
+}
+
+// Helper function to extract only the SHA digest from a full image URI with SHA
+func extractShaDigest(fullImage string, manifestOutput []byte) string {
+    // Check if the fullImage contains a SHA reference
+    if strings.Contains(fullImage, "@sha256:") {
+        parts := strings.Split(fullImage, "@sha256:")
+        if len(parts) == 2 {
+            return "sha256:" + parts[1]
+        }
+    }
+    // Fallback: Extract SHA from output if available
+    manifest := struct {
+        Digest string `json:"digest"`
+    }{}
+    _ = json.Unmarshal(manifestOutput, &manifest)
+    return manifest.Digest
+}
+
+// Helper function to inspect single-architecture images
+func inspectSingleArchImage(fullImage, containerName, cleanedImage, tag string) (PodImageInfo, error) {
     cmd := exec.Command("docker", "manifest", "inspect", fullImage)
     output, err := cmd.CombinedOutput()
     if err != nil {
-        return PodImageInfo{}, fmt.Errorf("docker manifest inspect failed for image %s: %s", imageURI, string(output))
+        return PodImageInfo{}, fmt.Errorf("docker manifest inspect failed for image %s: %s", fullImage, string(output))
     }
 
     var manifest struct {
@@ -215,20 +296,68 @@ func getImageDetails(imageURI, containerName string) (PodImageInfo, error) {
         totalSize += layer.Size
     }
 
-    imageInfo := PodImageInfo{
+    return PodImageInfo{
         ContainerName: containerName,
         ImageURI:      cleanedImage,
         Tag:           tag,
-        ShaDigest:     shaDigest,
+        ShaDigest:     fullImage, // SHA if available
         Size:          formatSize(totalSize),
         SizeBytes:     totalSize,
+    }, nil
+}
+
+// Helper function to determine if an image is multi-architecture
+func isMultiArch(manifestOutput []byte) bool {
+    var manifestCheck struct {
+        Manifests []struct{} `json:"manifests"`
+    }
+    err := json.Unmarshal(manifestOutput, &manifestCheck)
+    return err == nil && len(manifestCheck.Manifests) > 0
+}
+
+func getNamespaceImageReports(clientset *kubernetes.Clientset) ([]PodImageReport, error) {
+    namespaceList, err := clientset.CoreV1().Namespaces().List(context.TODO(), metav1.ListOptions{})
+    if err != nil {
+        return nil, fmt.Errorf("error retrieving namespaces: %v", err)
+    }
+    totalNamespaces := len(namespaceList.Items)
+    var allReports []PodImageReport
+
+    for nsIndex, namespace := range namespaceList.Items {
+        ns := namespace.Name
+        fmt.Printf("Processing Namespace %d/%d: %s (%d%% Complete)\n", nsIndex+1, totalNamespaces, ns, (nsIndex+1)*100/totalNamespaces)
+
+        reports, err := getNamespaceImageReportsForSingleNamespace(clientset, ns)
+        if err != nil {
+            fmt.Fprintf(os.Stderr, "Warning: skipping namespace %s due to error: %v\n", ns, err)
+            continue
+        }
+        allReports = append(allReports, reports...)
+    }
+    return allReports, nil
+}
+
+func getNamespaceImageReportsForSingleNamespace(clientset *kubernetes.Clientset, ns string) ([]PodImageReport, error) {
+    pods, err := clientset.CoreV1().Pods(ns).List(context.TODO(), metav1.ListOptions{})
+    if err != nil {
+        return nil, fmt.Errorf("error retrieving pods for namespace %s: %v", ns, err)
     }
 
-    cacheMutex.Lock()
-    imageCache[cacheKey] = imageInfo
-    cacheMutex.Unlock()
+    var reports []PodImageReport
+    totalPods := len(pods.Items)
 
-    return imageInfo, nil
+    for i, pod := range pods.Items {
+        percentComplete := (i + 1) * 100 / totalPods
+        fmt.Printf("Processing Pod %d/%d in Namespace %s: %s (%d%% Complete)\n", i+1, totalPods, ns, pod.Name, percentComplete)
+
+        report, err := getPodImageReport(clientset, pod.Namespace, pod.Name)
+        if err != nil {
+            fmt.Fprintf(os.Stderr, "Warning: skipping pod %s in namespace %s due to error: %v\n", pod.Name, ns, err)
+            continue
+        }
+        reports = append(reports, report)
+    }
+    return reports, nil
 }
 
 func parseImageURI(imageURI string) (string, string, string) {
@@ -317,3 +446,4 @@ func tableOutput(reports []PodImageReport) {
         fmt.Println()
     }
 }
+
