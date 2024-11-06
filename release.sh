@@ -90,6 +90,7 @@ vendir sync
 cp upstream/* plugins/
 gh release create "$RELEASE_TAG" "$ARTIFACTS_DIR"/*.tar.gz --title "$RELEASE_TAG" --notes "Release of $PLUGIN_NAME version $VERSION"
 rm -rf "$ARTIFACTS_DIR"/*.tar.gz
+rm -rf "$BINARIES_DIR/*"
 git add .
 git commit -m "adding $PLUGIN_NAME version $VERSION manifest"
 git push
