@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: new version 0.20.1 of view-allocations (#4189)
-      sha: 4776760b219755e18865d075c9244a59414f17a1
+      commitTitle: new version v0.107.6 of support-bundle (#4192)
+      sha: d127e14dad0722ed1d76764ae90cf0c9b5526ea3
     path: .
   path: upstream
 kind: LockConfig

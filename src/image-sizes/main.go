@@ -59,6 +59,18 @@ func init() {
     flag.StringVar(&outputFormat, "o", "table", "Output format: table, json, yaml (shorthand for --output)")
     flag.StringVar(&podName, "pod", "", "Specific pod name to query")
     flag.StringVar(&podName, "p", "", "Specific pod name to query (shorthand for --pod)")
+    flag.Usage = func() {
+        fmt.Fprintf(os.Stderr, "Usage: kubectl image-sizes [flags]\n\n")
+        fmt.Fprintf(os.Stderr, "This command outputs image sizes for containers per pod, namespace or cluster wide.\n\n")
+        fmt.Fprintf(os.Stderr, "Flags:\n")
+	fmt.Fprintf(os.Stderr, "  -A, --all-namespaces          Query all namespaces\n")
+        fmt.Fprintf(os.Stderr, "  -n, --namespace <namespace>   Namespace to use\n")
+        fmt.Fprintf(os.Stderr, "  -o, --output <format>         Output format: table, json, yaml\n")
+        fmt.Fprintf(os.Stderr, "  -p, --pod <pod name>          Specific pod name to query\n")
+        fmt.Fprintf(os.Stderr, "      --kubeconfig <file>       Path to the kubeconfig file\n")
+        fmt.Fprintf(os.Stderr, "      --context <context>       Kubernetes context to use\n")
+        os.Exit(1)
+    }
 }
 
 func main() {
