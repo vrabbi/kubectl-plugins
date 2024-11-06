@@ -3,7 +3,7 @@ kind: Plugin
 metadata:
   name: image-sizes
 spec:
-  version: "v0.2.0"
+  version: "v1.0.0"
   homepage: "https://github.com/vrabbi/kubectl-plugins"
   shortDescription: a kubectl plugin written by vrabbi
   platforms:
@@ -11,8 +11,8 @@ spec:
       matchLabels:
         os: "linux"
         arch: "amd64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/image-sizes-v0.2.0/kubectl-image-sizes-v0.2.0-linux-amd64.tar.gz"
-    sha256: "a79436cef210ce6142bd525a07948bfe630b36ef5fc3ffc09048edb093461308"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/image-sizes-v1.0.0/kubectl-image-sizes-v1.0.0-linux-amd64.tar.gz"
+    sha256: "428559dfb4b91aae4b0eb3afc9295bae8718de7c03e0664a4be177438d6397b0"
     bin: "kubectl-image-sizes"
     files:
       - from: "kubectl-image-sizes"
@@ -21,8 +21,8 @@ spec:
       matchLabels:
         os: "linux"
         arch: "arm64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/image-sizes-v0.2.0/kubectl-image-sizes-v0.2.0-linux-arm64.tar.gz"
-    sha256: "c34eb0243be635c9a9f5de842ebb32fa387582648776d42425c4d9e6d61e823a"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/image-sizes-v1.0.0/kubectl-image-sizes-v1.0.0-linux-arm64.tar.gz"
+    sha256: "853ed09d43163a5b7a768628842afcd355cb3d2a7af03c74bd8cb46fbd04f592"
     bin: "kubectl-image-sizes"
     files:
       - from: "kubectl-image-sizes"
@@ -31,8 +31,8 @@ spec:
       matchLabels:
         os: "darwin"
         arch: "amd64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/image-sizes-v0.2.0/kubectl-image-sizes-v0.2.0-darwin-amd64.tar.gz"
-    sha256: "b749c75abbaf4eea6d04f58260efbe036fc617a2be72a64bbef07b600dbccb20"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/image-sizes-v1.0.0/kubectl-image-sizes-v1.0.0-darwin-amd64.tar.gz"
+    sha256: "23fd5364218a18245cc251fa5fff1e0747e9b2af0bab85284f7823f9273f4a35"
     bin: "kubectl-image-sizes"
     files:
       - from: "kubectl-image-sizes"
@@ -41,8 +41,8 @@ spec:
       matchLabels:
         os: "darwin"
         arch: "arm64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/image-sizes-v0.2.0/kubectl-image-sizes-v0.2.0-darwin-arm64.tar.gz"
-    sha256: "4cd70ab457f8f0f56f27430b7609e0194f26f0df812b0a2185392224a1a50699"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/image-sizes-v1.0.0/kubectl-image-sizes-v1.0.0-darwin-arm64.tar.gz"
+    sha256: "f0d765d0901d068a135fadcf30058e20a913999a4828ac1f793032e23bf8cffe"
     bin: "kubectl-image-sizes"
     files:
       - from: "kubectl-image-sizes"
@@ -51,8 +51,8 @@ spec:
       matchLabels:
         os: "windows"
         arch: "amd64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/image-sizes-v0.2.0/kubectl-image-sizes-v0.2.0-windows-amd64.tar.gz"
-    sha256: "d17b06f3d4209eb976d43c73dd6a64ac9aaaccb91cd31ab0e201699d793d76b6"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/image-sizes-v1.0.0/kubectl-image-sizes-v1.0.0-windows-amd64.tar.gz"
+    sha256: "d715a80159e8c70186cde1f2ec12dbaf06e1b47497dfaf0438eb3e338db04b5e"
     bin: "kubectl-image-sizes"
     files:
       - from: "kubectl-image-sizes"
@@ -61,8 +61,8 @@ spec:
       matchLabels:
         os: "windows"
         arch: "arm64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/image-sizes-v0.2.0/kubectl-image-sizes-v0.2.0-windows-arm64.tar.gz"
-    sha256: "3fc3b2fd2cafe4a70296432c17207338c88e5b228592d4193b3397b6bdbb56ab"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/image-sizes-v1.0.0/kubectl-image-sizes-v1.0.0-windows-arm64.tar.gz"
+    sha256: "7af7b2e9b01c1fd5278c781c5a61528c278546c5b5eafbb2756c8d7a51f28e97"
     bin: "kubectl-image-sizes"
     files:
       - from: "kubectl-image-sizes"
