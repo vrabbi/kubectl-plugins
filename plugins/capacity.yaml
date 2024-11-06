@@ -3,7 +3,7 @@ kind: Plugin
 metadata:
   name: capacity
 spec:
-  version: "v0.0.2"
+  version: "v1.0.0"
   homepage: "https://github.com/vrabbi/kubectl-plugins"
   shortDescription: a kubectl plugin written by vrabbi
   platforms:
@@ -11,8 +11,8 @@ spec:
       matchLabels:
         os: "linux"
         arch: "amd64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-v0.0.2/kubectl-capacity-v0.0.2-linux-amd64.tar.gz"
-    sha256: "883afeaf0db3d44c206d2e6523917b90150d7b0165ad1aafb33e2d777b40e762"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-v1.0.0/kubectl-capacity-v1.0.0-linux-amd64.tar.gz"
+    sha256: "40e80836a4d367a1ef005704a58422b8a6b0b0d2b2210c997056aaee21866350"
     bin: "kubectl-capacity"
     files:
       - from: "kubectl-capacity"
@@ -21,8 +21,8 @@ spec:
       matchLabels:
         os: "linux"
         arch: "arm64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-v0.0.2/kubectl-capacity-v0.0.2-linux-arm64.tar.gz"
-    sha256: "eb7bdae91a25d0ab0d24342d5934fc642290f9cb48a10dffb6971c07e8f52adb"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-v1.0.0/kubectl-capacity-v1.0.0-linux-arm64.tar.gz"
+    sha256: "c7b08e506ddd806338166bb92cfb0b0f9276783371de37490c5bc18dc913814f"
     bin: "kubectl-capacity"
     files:
       - from: "kubectl-capacity"
@@ -31,8 +31,8 @@ spec:
       matchLabels:
         os: "darwin"
         arch: "amd64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-v0.0.2/kubectl-capacity-v0.0.2-darwin-amd64.tar.gz"
-    sha256: "bb43545492bbb73b4479d955a03ccced8970ff1579682d9887417aee51bf383c"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-v1.0.0/kubectl-capacity-v1.0.0-darwin-amd64.tar.gz"
+    sha256: "b07db21ddf6e5e34decee2a93df6feffde49b984f86497353d5cd87bc997ec93"
     bin: "kubectl-capacity"
     files:
       - from: "kubectl-capacity"
@@ -41,8 +41,8 @@ spec:
       matchLabels:
         os: "darwin"
         arch: "arm64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-v0.0.2/kubectl-capacity-v0.0.2-darwin-arm64.tar.gz"
-    sha256: "6d17faac6d1261d3c5aa3d0fa392b66840ae619409c4ca03d43ebaea3a3ed57f"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-v1.0.0/kubectl-capacity-v1.0.0-darwin-arm64.tar.gz"
+    sha256: "5bd7c9ad4dd4710ffec541190b52530d83ed29db3ffcdc90948a1fec5c39ca88"
     bin: "kubectl-capacity"
     files:
       - from: "kubectl-capacity"
@@ -51,8 +51,8 @@ spec:
       matchLabels:
         os: "windows"
         arch: "amd64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-v0.0.2/kubectl-capacity-v0.0.2-windows-amd64.tar.gz"
-    sha256: "8d404cf87ddfe3f140153daabb0d361757e6f2df66b28107ac8abdc1e92cf091"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-v1.0.0/kubectl-capacity-v1.0.0-windows-amd64.tar.gz"
+    sha256: "74dbca9a494c0a7bd6bfd6d6899fc796d5dafe32b667473fef54972be326c023"
     bin: "kubectl-capacity"
     files:
       - from: "kubectl-capacity"
@@ -61,8 +61,8 @@ spec:
       matchLabels:
         os: "windows"
         arch: "arm64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-v0.0.2/kubectl-capacity-v0.0.2-windows-arm64.tar.gz"
-    sha256: "d920f8959e72cf7f69b7635809428e1b90e0fb798375157552a5e581054f9177"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/capacity-v1.0.0/kubectl-capacity-v1.0.0-windows-arm64.tar.gz"
+    sha256: "186339bc6a38344ffdd822f2a6fff2ce966e70f28e064d4b3e94cc375b35334b"
     bin: "kubectl-capacity"
     files:
       - from: "kubectl-capacity"
