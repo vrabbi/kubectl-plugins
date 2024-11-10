@@ -3,7 +3,7 @@ kind: Plugin
 metadata:
   name: yamlgen
 spec:
-  version: "v0.0.1"
+  version: "v0.0.2"
   homepage: "https://github.com/vrabbi/kubectl-plugins"
   shortDescription: a kubectl plugin written by vrabbi
   platforms:
@@ -11,8 +11,8 @@ spec:
       matchLabels:
         os: "linux"
         arch: "amd64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/yamlgen-v0.0.1/kubectl-yamlgen-v0.0.1-linux-amd64.tar.gz"
-    sha256: "cffa9941befb8bf305e044e3275c7e1accb75d8f948816926e28aa2320ff4772"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/yamlgen-v0.0.2/kubectl-yamlgen-v0.0.2-linux-amd64.tar.gz"
+    sha256: "50ec193e314ae98edd5a2851fb8b5505888474cf407dcf595aecbd2174230280"
     bin: "kubectl-yamlgen"
     files:
       - from: "kubectl-yamlgen"
@@ -21,8 +21,8 @@ spec:
       matchLabels:
         os: "linux"
         arch: "arm64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/yamlgen-v0.0.1/kubectl-yamlgen-v0.0.1-linux-arm64.tar.gz"
-    sha256: "f86108e19e204dd980e0e1ab99fe9e669e8304ea0221ed5e5c8250993482ae49"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/yamlgen-v0.0.2/kubectl-yamlgen-v0.0.2-linux-arm64.tar.gz"
+    sha256: "dd5854bc874f06386c6d1c3ff28b970a2cd43732f6b6663a491d8f091a189bb0"
     bin: "kubectl-yamlgen"
     files:
       - from: "kubectl-yamlgen"
@@ -31,8 +31,8 @@ spec:
       matchLabels:
         os: "darwin"
         arch: "amd64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/yamlgen-v0.0.1/kubectl-yamlgen-v0.0.1-darwin-amd64.tar.gz"
-    sha256: "f0fb65b65f743cef233d40651d49e1890435f574ae9caa9a6167020415845350"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/yamlgen-v0.0.2/kubectl-yamlgen-v0.0.2-darwin-amd64.tar.gz"
+    sha256: "4d0af8e67818e98495cf529cd8b6a93d24f3b2c80b1ab6cb68ce11f61d359220"
     bin: "kubectl-yamlgen"
     files:
       - from: "kubectl-yamlgen"
@@ -41,8 +41,8 @@ spec:
       matchLabels:
         os: "darwin"
         arch: "arm64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/yamlgen-v0.0.1/kubectl-yamlgen-v0.0.1-darwin-arm64.tar.gz"
-    sha256: "bf1d52300fc0dec2c43c70888a040a30947f241ccbd5051922afc04371ef3cf4"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/yamlgen-v0.0.2/kubectl-yamlgen-v0.0.2-darwin-arm64.tar.gz"
+    sha256: "646da41e3eb62089ff1286dd80c8eaaab676a21b3c96aa6cafa0e2675d792ed4"
     bin: "kubectl-yamlgen"
     files:
       - from: "kubectl-yamlgen"
@@ -51,8 +51,8 @@ spec:
       matchLabels:
         os: "windows"
         arch: "amd64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/yamlgen-v0.0.1/kubectl-yamlgen-v0.0.1-windows-amd64.tar.gz"
-    sha256: "8741256f87ce441061e5546d99b432fa4b2d870f80bdcdf5bcef3d0aef55e815"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/yamlgen-v0.0.2/kubectl-yamlgen-v0.0.2-windows-amd64.tar.gz"
+    sha256: "f0bb7184b2a7c342ff2c00ecf3a19828283ad06267759e26aa71d3d519d27e3c"
     bin: "kubectl-yamlgen"
     files:
       - from: "kubectl-yamlgen"
@@ -61,8 +61,8 @@ spec:
       matchLabels:
         os: "windows"
         arch: "arm64"
-    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/yamlgen-v0.0.1/kubectl-yamlgen-v0.0.1-windows-arm64.tar.gz"
-    sha256: "cca6f4e46b59d9a0ef3b848f96e8a6b62954c50887f4f2562a82b7162629aa49"
+    uri: "https://github.com/vrabbi/kubectl-plugins/releases/download/yamlgen-v0.0.2/kubectl-yamlgen-v0.0.2-windows-arm64.tar.gz"
+    sha256: "e705511ad370d31b7d6a73bbbe296f4cbf6c468f1b5f2fc0bcc4b3f72d7a52bc"
     bin: "kubectl-yamlgen"
     files:
       - from: "kubectl-yamlgen"

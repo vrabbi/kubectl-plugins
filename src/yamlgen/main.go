@@ -30,16 +30,31 @@ func main() {
     var crdName, filePath string
 
     flag.StringVar(&crdName, "crd-name", "", "Name of the CRD")
+    flag.StringVar(&crdName, "n", "", "Name of the CRD")
     flag.StringVar(&filePath, "file", "", "Path to a file containing the CRD definition")
+    flag.StringVar(&filePath, "f", "", "Path to a file containing the CRD definition")
     flag.BoolVar(&includeOptional, "include-optional", true, "Include optional fields in output")
     flag.BoolVar(&includeDescriptions, "include-descriptions", true, "Include field descriptions in output")
     flag.BoolVar(&includeConstraints, "include-constraints", true, "Include field constraints in output")
     flag.IntVar(&depth, "depth", 10, "Depth to extrapolate nested fields")
     flag.BoolVar(&rawExample, "raw-example", false, "If true, output all fields without comments, descriptions, or constraints")
-    flag.Parse()
 
+    flag.Usage = func() {
+        fmt.Fprintf(os.Stderr, "Usage: kubectl yamlgen [flags]\n\n")
+        fmt.Fprintf(os.Stderr, "This command generates a templated yaml for any CRD\n\n")
+        fmt.Fprintf(os.Stderr, "Flags:\n")
+        fmt.Fprintf(os.Stderr, "  -n, --crd-name string    Name of the CRD in the cluster\n")
+        fmt.Fprintf(os.Stderr, "  -f, --file               Path to a file containing the CRD definition\n")
+	fmt.Fprintf(os.Stderr, "  --include-optional       Include optional fields in output (Default: true)\n")
+        fmt.Fprintf(os.Stderr, "  --include-descriptions   Include field descriptions in output (Default: true)\n")
+	fmt.Fprintf(os.Stderr, "  --include-constraints    Include field constraints in output (Default: true)\n")
+	fmt.Fprintf(os.Stderr, "  --depth                  Depth to extrapolate nested fields (Default: 10)\n")
+	fmt.Fprintf(os.Stderr, "  --raw-example            If true, output all fields without comments, descriptions, or constraints (Default: false)\n")
+    }
+    flag.Parse()
+  
     if crdName == "" && filePath == "" {
-        fmt.Println("Error: either --crd-name or --file must be specified")
+        fmt.Println("Error: a CRD must be specified. use the --help flag for more details")
         os.Exit(1)
     }
 
