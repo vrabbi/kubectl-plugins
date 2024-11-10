@@ -1,0 +1,107 @@
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    crossplane.io/external-create-pending: "2024-07-04T06:55:51Z"
+    crossplane.io/external-create-succeeded: "2024-07-04T06:55:51Z"
+    crossplane.io/external-name: k8s-w27-s032-lxfkx
+  creationTimestamp: "2024-07-04T06:55:41Z"
+  finalizers:
+  - finalizer.managedresource.crossplane.io
+  generateName: k8s-w27-s032-
+  generation: 2
+  labels:
+    crossplane.io/claim-name: ""
+    crossplane.io/claim-namespace: ""
+    crossplane.io/composite: k8s-w27-s032
+  name: k8s-w27-s032-lxfkx
+  ownerReferences:
+  - apiVersion: tkg.terasky.com/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: LabCluster
+    name: k8s-w27-s032
+    uid: 96c3005b-de41-432a-95d9-742c6154bdd1
+  resourceVersion: "822857035"
+  uid: f6b4d82f-e328-4b00-8f2b-9188594af400
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    manifest:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: k8s-w27-s032
+        namespace: default
+      stringData:
+        password: Pajama1994
+        username: scott@terasky.demo
+  managementPolicy: Default
+  providerConfigRef:
+    name: mgmt-cluster
+  readiness:
+    policy: SuccessfulCreate
+status:
+  atProvider:
+    manifest:
+      apiVersion: v1
+      data:
+        password: UGFqYW1hMTk5NA==
+        username: c2NvdHRAdGVyYXNreS5kZW1v
+      kind: Secret
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Secret","metadata":{"name":"k8s-w27-s032","namespace":"default"},"stringData":{"password":"Pajama1994","username":"scott@terasky.demo"}}'
+        creationTimestamp: "2024-07-04T06:55:51Z"
+        finalizers:
+        - vspherecluster/infrastructure.cluster.x-k8s.io
+        managedFields:
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:data:
+              .: {}
+              f:password: {}
+              f:username: {}
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/last-applied-configuration: {}
+            f:type: {}
+          manager: crossplane-kubernetes-provider
+          operation: Update
+          time: "2024-07-04T06:55:51Z"
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:finalizers:
+                .: {}
+                v:"vspherecluster/infrastructure.cluster.x-k8s.io": {}
+              f:ownerReferences:
+                .: {}
+                k:{"uid":"ada16db3-6b44-486d-b060-8aa2e1be92b7"}: {}
+          manager: manager
+          operation: Update
+          time: "2024-07-04T06:59:48Z"
+        name: k8s-w27-s032
+        namespace: default
+        ownerReferences:
+        - apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+          kind: VSphereCluster
+          name: k8s-w27-s032-r9g4n
+          uid: ada16db3-6b44-486d-b060-8aa2e1be92b7
+        resourceVersion: "271020067"
+        uid: 235674b5-dc47-4ca1-be67-d1ad95815ff9
+      type: Opaque
+  conditions:
+  - lastTransitionTime: "2024-07-04T06:55:52Z"
+    reason: Available
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-11-03T09:44:49Z"
+    message: 'connect failed: cannot create new Kubernetes client: cannot create Kubernetes
+      client: the server has asked for the client to provide credentials'
+    reason: ReconcileError
+    status: "False"
+    type: Synced

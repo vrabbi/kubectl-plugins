@@ -1,0 +1,153 @@
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    crossplane.io/external-create-pending: "2024-07-04T06:55:57Z"
+    crossplane.io/external-create-succeeded: "2024-07-04T06:55:57Z"
+    crossplane.io/external-name: k8s-w27-s035-9vk99
+  creationTimestamp: "2024-07-04T06:55:41Z"
+  finalizers:
+  - finalizer.managedresource.crossplane.io
+  generateName: k8s-w27-s035-
+  generation: 2
+  labels:
+    crossplane.io/claim-name: ""
+    crossplane.io/claim-namespace: ""
+    crossplane.io/composite: k8s-w27-s035
+  name: k8s-w27-s035-9vk99
+  ownerReferences:
+  - apiVersion: tkg.terasky.com/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: LabCluster
+    name: k8s-w27-s035
+    uid: 5b663764-2173-48f6-b0d0-8f451bbceabd
+  resourceVersion: "822856570"
+  uid: 897537af-7e52-4cba-ba5a-d9376fd81f01
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    manifest:
+      apiVersion: csi.tanzu.vmware.com/v1alpha1
+      kind: VSphereCSIConfig
+      metadata:
+        name: k8s-w27-s035
+        namespace: default
+      spec:
+        vsphereCSI:
+          config:
+            datacenter: /Demo-Datacenter
+            httpProxy: ""
+            httpsProxy: ""
+            insecureFlag: true
+            noProxy: ""
+            tlsThumbprint: ""
+            useTopologyCategories: false
+          mode: vsphereCSI
+  managementPolicy: Default
+  providerConfigRef:
+    name: mgmt-cluster
+  readiness:
+    policy: SuccessfulCreate
+status:
+  atProvider:
+    manifest:
+      apiVersion: csi.tanzu.vmware.com/v1alpha1
+      kind: VSphereCSIConfig
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"csi.tanzu.vmware.com/v1alpha1","kind":"VSphereCSIConfig","metadata":{"name":"k8s-w27-s035","namespace":"default"},"spec":{"vsphereCSI":{"config":{"datacenter":"/Demo-Datacenter","httpProxy":"","httpsProxy":"","insecureFlag":true,"noProxy":"","tlsThumbprint":"","useTopologyCategories":false},"mode":"vsphereCSI"}}}'
+        creationTimestamp: "2024-07-04T06:55:57Z"
+        generation: 1
+        labels:
+          tkg.tanzu.vmware.com/cluster-name: k8s-w27-s035
+          tkg.tanzu.vmware.com/package-name: vsphere-csi.tanzu.vmware.com.3.0.1---vmware.2-tkg.1
+        managedFields:
+        - apiVersion: csi.tanzu.vmware.com/v1alpha1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/last-applied-configuration: {}
+            f:spec:
+              .: {}
+              f:vsphereCSI:
+                .: {}
+                f:config:
+                  .: {}
+                  f:datacenter: {}
+                  f:httpProxy: {}
+                  f:httpsProxy: {}
+                  f:insecureFlag: {}
+                  f:noProxy: {}
+                  f:tlsThumbprint: {}
+                  f:useTopologyCategories: {}
+                f:mode: {}
+          manager: crossplane-kubernetes-provider
+          operation: Update
+          time: "2024-07-04T06:55:57Z"
+        - apiVersion: csi.tanzu.vmware.com/v1alpha1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:tkg.tanzu.vmware.com/cluster-name: {}
+                f:tkg.tanzu.vmware.com/package-name: {}
+              f:ownerReferences:
+                .: {}
+                k:{"uid":"d27e9a2e-9c2e-4408-a1a3-0d0a7423a8a4"}: {}
+                k:{"uid":"f3653f8b-412a-4d8a-8494-ce1a8f2e5444"}: {}
+          manager: manager
+          operation: Update
+          time: "2024-07-04T06:57:09Z"
+        - apiVersion: csi.tanzu.vmware.com/v1alpha1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              .: {}
+              f:secretRef: {}
+          manager: manager
+          operation: Update
+          subresource: status
+          time: "2024-07-04T06:59:46Z"
+        name: k8s-w27-s035
+        namespace: default
+        ownerReferences:
+        - apiVersion: cluster.x-k8s.io/v1beta1
+          kind: Cluster
+          name: k8s-w27-s035
+          uid: d27e9a2e-9c2e-4408-a1a3-0d0a7423a8a4
+        - apiVersion: run.tanzu.vmware.com/v1alpha3
+          blockOwnerDeletion: true
+          controller: true
+          kind: ClusterBootstrap
+          name: k8s-w27-s035
+          uid: f3653f8b-412a-4d8a-8494-ce1a8f2e5444
+        resourceVersion: "271019872"
+        uid: bbe15084-5064-4706-8f8c-90cdd8f96c4e
+      spec:
+        vsphereCSI:
+          config:
+            datacenter: /Demo-Datacenter
+            httpProxy: ""
+            httpsProxy: ""
+            insecureFlag: true
+            noProxy: ""
+            tlsThumbprint: ""
+            useTopologyCategories: false
+          mode: vsphereCSI
+      status:
+        secretRef: k8s-w27-s035-vsphere-csi-data-values
+  conditions:
+  - lastTransitionTime: "2024-07-04T06:55:58Z"
+    reason: Available
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-11-03T09:44:36Z"
+    message: 'connect failed: cannot create new Kubernetes client: cannot create Kubernetes
+      client: the server has asked for the client to provide credentials'
+    reason: ReconcileError
+    status: "False"
+    type: Synced

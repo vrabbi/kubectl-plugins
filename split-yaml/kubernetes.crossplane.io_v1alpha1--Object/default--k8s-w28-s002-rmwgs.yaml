@@ -1,0 +1,192 @@
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    crossplane.io/external-create-pending: "2024-03-13T20:43:59Z"
+    crossplane.io/external-create-succeeded: "2024-03-13T20:44:00Z"
+    crossplane.io/external-name: k8s-w28-s002-rmwgs
+  creationTimestamp: "2024-03-13T20:43:56Z"
+  deletionGracePeriodSeconds: 0
+  deletionTimestamp: "2024-03-31T09:55:17Z"
+  finalizers:
+  - finalizer.managedresource.crossplane.io
+  generateName: k8s-w28-s002-
+  generation: 3
+  labels:
+    crossplane.io/claim-name: ""
+    crossplane.io/claim-namespace: ""
+    crossplane.io/composite: k8s-w28-s002
+  name: k8s-w28-s002-rmwgs
+  ownerReferences:
+  - apiVersion: tap.terasky.com/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Workspace
+    name: k8s-w28-s002
+    uid: 9003f824-c062-4f4f-856f-d098ad336feb
+  resourceVersion: "842982198"
+  uid: dfd885d1-e88f-4331-b815-8e73bbdd1a97
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    manifest:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        labels:
+          apps.tanzu.vmware.com/tap-ns: ""
+        name: k8s-w28-s002
+  managementPolicy: Default
+  providerConfigRef:
+    name: prod-cluster
+  readiness:
+    policy: SuccessfulCreate
+status:
+  atProvider:
+    manifest:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        annotations:
+          cattle.io/status: '{"Conditions":[{"Type":"ResourceQuotaInit","Status":"True","Message":"","LastUpdateTime":"2024-03-17T13:49:45Z"},{"Type":"InitialRolesPopulated","Status":"True","Message":"","LastUpdateTime":"2024-03-17T13:49:45Z"}]}'
+          kapp-controller.carvel.dev/exclude-global-packages: ""
+          kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Namespace","metadata":{"labels":{"apps.tanzu.vmware.com/tap-ns":""},"name":"k8s-w28-s002"}}'
+          lifecycle.cattle.io/create.namespace-auth: "true"
+        creationTimestamp: "2024-03-13T20:44:00Z"
+        deletionGracePeriodSeconds: 0
+        deletionTimestamp: "2024-03-31T09:55:17Z"
+        finalizers:
+        - namespace-provisioner.apps.tanzu.vmware.com/finalizer
+        labels:
+          apps.tanzu.vmware.com/tap-ns: ""
+          kubernetes.io/metadata.name: k8s-w28-s002
+        managedFields:
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/last-applied-configuration: {}
+              f:labels:
+                .: {}
+                f:apps.tanzu.vmware.com/tap-ns: {}
+                f:kubernetes.io/metadata.name: {}
+          manager: crossplane-kubernetes-provider
+          operation: Update
+          time: "2024-03-13T20:44:00Z"
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:finalizers:
+                .: {}
+                v:"namespace-provisioner.apps.tanzu.vmware.com/finalizer": {}
+          manager: namespace-provisioner
+          operation: Update
+          time: "2024-03-13T20:44:00Z"
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                f:cattle.io/status: {}
+                f:lifecycle.cattle.io/create.namespace-auth: {}
+          manager: rancher
+          operation: Update
+          time: "2024-03-17T13:49:44Z"
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                f:kapp-controller.carvel.dev/exclude-global-packages: {}
+          manager: kapp-controller
+          operation: Update
+          time: "2024-03-31T09:55:22Z"
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                .: {}
+                k:{"type":"NamespaceContentRemaining"}:
+                  .: {}
+                  f:lastTransitionTime: {}
+                  f:message: {}
+                  f:reason: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"NamespaceDeletionContentFailure"}:
+                  .: {}
+                  f:lastTransitionTime: {}
+                  f:message: {}
+                  f:reason: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"NamespaceDeletionDiscoveryFailure"}:
+                  .: {}
+                  f:lastTransitionTime: {}
+                  f:message: {}
+                  f:reason: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"NamespaceDeletionGroupVersionParsingFailure"}:
+                  .: {}
+                  f:lastTransitionTime: {}
+                  f:message: {}
+                  f:reason: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"NamespaceFinalizersRemaining"}:
+                  .: {}
+                  f:lastTransitionTime: {}
+                  f:message: {}
+                  f:reason: {}
+                  f:status: {}
+                  f:type: {}
+          manager: kube-controller-manager
+          operation: Update
+          subresource: status
+          time: "2024-03-31T09:55:28Z"
+        name: k8s-w28-s002
+        resourceVersion: "63844836"
+        uid: e720d5e9-393d-4b69-8986-6072abf5aec8
+      spec: {}
+      status:
+        conditions:
+        - lastTransitionTime: "2024-03-31T09:55:28Z"
+          message: All resources successfully discovered
+          reason: ResourcesDiscovered
+          status: "False"
+          type: NamespaceDeletionDiscoveryFailure
+        - lastTransitionTime: "2024-03-31T09:55:28Z"
+          message: All legacy kube types successfully parsed
+          reason: ParsedGroupVersions
+          status: "False"
+          type: NamespaceDeletionGroupVersionParsingFailure
+        - lastTransitionTime: "2024-03-31T09:55:28Z"
+          message: All content successfully deleted, may be waiting on finalization
+          reason: ContentDeleted
+          status: "False"
+          type: NamespaceDeletionContentFailure
+        - lastTransitionTime: "2024-03-31T09:55:28Z"
+          message: All content successfully removed
+          reason: ContentRemoved
+          status: "False"
+          type: NamespaceContentRemaining
+        - lastTransitionTime: "2024-03-31T09:55:28Z"
+          message: All content-preserving finalizers finished
+          reason: ContentHasNoFinalizers
+          status: "False"
+          type: NamespaceFinalizersRemaining
+        phase: Terminating
+  conditions:
+  - lastTransitionTime: "2024-11-10T09:27:37Z"
+    reason: Deleting
+    status: "False"
+    type: Ready
+  - lastTransitionTime: "2024-11-03T08:46:15Z"
+    reason: ReconcileSuccess
+    status: "True"
+    type: Synced

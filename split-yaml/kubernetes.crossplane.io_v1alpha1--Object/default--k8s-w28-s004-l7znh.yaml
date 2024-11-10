@@ -1,0 +1,102 @@
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    crossplane.io/external-create-pending: "2024-04-07T16:21:36Z"
+    crossplane.io/external-create-succeeded: "2024-04-07T16:21:36Z"
+    crossplane.io/external-name: k8s-w28-s004-l7znh
+  creationTimestamp: "2024-04-07T16:21:35Z"
+  finalizers:
+  - finalizer.managedresource.crossplane.io
+  generateName: k8s-w28-s004-
+  generation: 2
+  labels:
+    crossplane.io/claim-name: ""
+    crossplane.io/claim-namespace: ""
+    crossplane.io/composite: k8s-w28-s004
+  name: k8s-w28-s004-l7znh
+  ownerReferences:
+  - apiVersion: tap.terasky.com/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Workspace
+    name: k8s-w28-s004
+    uid: 832f4315-3d00-4989-9690-caecf35e104d
+  resourceVersion: "804408080"
+  uid: b6783dac-9696-4d38-9ccb-1724d41fa5a0
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    manifest:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        labels:
+          apps.tanzu.vmware.com/tap-ns: ""
+        name: k8s-w28-s004
+  managementPolicy: Default
+  providerConfigRef:
+    name: prod-cluster
+  readiness:
+    policy: SuccessfulCreate
+status:
+  atProvider:
+    manifest:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        annotations:
+          cattle.io/status: '{"Conditions":[{"Type":"ResourceQuotaInit","Status":"True","Message":"","LastUpdateTime":"2024-04-07T16:21:37Z"},{"Type":"InitialRolesPopulated","Status":"True","Message":"","LastUpdateTime":"2024-04-07T16:21:37Z"}]}'
+          kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Namespace","metadata":{"labels":{"apps.tanzu.vmware.com/tap-ns":""},"name":"k8s-w28-s004"}}'
+          lifecycle.cattle.io/create.namespace-auth: "true"
+        creationTimestamp: "2024-04-07T16:21:36Z"
+        finalizers:
+        - controller.cattle.io/namespace-auth
+        labels:
+          apps.tanzu.vmware.com/tap-ns: ""
+          kubernetes.io/metadata.name: k8s-w28-s004
+        managedFields:
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/last-applied-configuration: {}
+              f:labels:
+                .: {}
+                f:apps.tanzu.vmware.com/tap-ns: {}
+                f:kubernetes.io/metadata.name: {}
+          manager: crossplane-kubernetes-provider
+          operation: Update
+          time: "2024-04-07T16:21:36Z"
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                f:cattle.io/status: {}
+                f:lifecycle.cattle.io/create.namespace-auth: {}
+              f:finalizers:
+                .: {}
+                v:"controller.cattle.io/namespace-auth": {}
+          manager: rancher
+          operation: Update
+          time: "2024-04-07T16:21:36Z"
+        name: k8s-w28-s004
+        resourceVersion: "87967126"
+        uid: 8f8bbc0f-484b-4c97-8ee6-e38e1d8c7b60
+      spec:
+        finalizers:
+        - kubernetes
+      status:
+        phase: Active
+  conditions:
+  - lastTransitionTime: "2024-04-07T16:21:37Z"
+    reason: Available
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-10-27T17:27:19Z"
+    reason: ReconcileSuccess
+    status: "True"
+    type: Synced

@@ -1,0 +1,207 @@
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    crossplane.io/external-create-pending: "2024-09-08T11:42:38Z"
+    crossplane.io/external-create-succeeded: "2024-09-08T11:42:38Z"
+    crossplane.io/external-name: k8s-w27-s040-p2smn
+  creationTimestamp: "2024-09-08T11:42:38Z"
+  finalizers:
+  - finalizer.managedresource.crossplane.io
+  generateName: k8s-w27-s040-
+  generation: 2
+  labels:
+    crossplane.io/claim-name: ""
+    crossplane.io/claim-namespace: ""
+    crossplane.io/composite: k8s-w27-s040
+  name: k8s-w27-s040-p2smn
+  ownerReferences:
+  - apiVersion: tkg.terasky.com/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: LabCluster
+    name: k8s-w27-s040
+    uid: a37e3aef-0c7f-42de-9be2-347a3564f8b9
+  resourceVersion: "822856649"
+  uid: 2b495287-538f-4fc0-9350-c0d3f41ec0df
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    manifest:
+      apiVersion: run.tanzu.vmware.com/v1alpha3
+      kind: ClusterBootstrap
+      metadata:
+        annotations:
+          tkg.tanzu.vmware.com/add-missing-fields-from-tkr: v1.26.5---vmware.2-tkg.1
+        name: k8s-w27-s040
+        namespace: default
+      spec:
+        additionalPackages:
+        - refName: metrics-server*
+        - refName: secretgen-controller*
+        - refName: pinniped*
+        cni:
+          refName: antrea*
+          valuesFrom:
+            providerRef:
+              apiGroup: cni.tanzu.vmware.com
+              kind: AntreaConfig
+              name: k8s-w27-s040
+        csi:
+          refName: vsphere-csi*
+          valuesFrom:
+            providerRef:
+              apiGroup: csi.tanzu.vmware.com
+              kind: VSphereCSIConfig
+              name: k8s-w27-s040
+        kapp:
+          refName: kapp-controller*
+  managementPolicy: Default
+  providerConfigRef:
+    name: mgmt-cluster
+  readiness:
+    policy: SuccessfulCreate
+status:
+  atProvider:
+    manifest:
+      apiVersion: run.tanzu.vmware.com/v1alpha3
+      kind: ClusterBootstrap
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"run.tanzu.vmware.com/v1alpha3","kind":"ClusterBootstrap","metadata":{"annotations":{"tkg.tanzu.vmware.com/add-missing-fields-from-tkr":"v1.26.5---vmware.2-tkg.1"},"name":"k8s-w27-s040","namespace":"default"},"spec":{"additionalPackages":[{"refName":"metrics-server*"},{"refName":"secretgen-controller*"},{"refName":"pinniped*"}],"cni":{"refName":"antrea*","valuesFrom":{"providerRef":{"apiGroup":"cni.tanzu.vmware.com","kind":"AntreaConfig","name":"k8s-w27-s040"}}},"csi":{"refName":"vsphere-csi*","valuesFrom":{"providerRef":{"apiGroup":"csi.tanzu.vmware.com","kind":"VSphereCSIConfig","name":"k8s-w27-s040"}}},"kapp":{"refName":"kapp-controller*"}}}'
+          tkg.tanzu.vmware.com/add-missing-fields-from-tkr: v1.26.5---vmware.2-tkg.1
+        creationTimestamp: "2024-09-08T11:42:38Z"
+        generation: 2
+        managedFields:
+        - apiVersion: run.tanzu.vmware.com/v1alpha3
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/last-applied-configuration: {}
+                f:tkg.tanzu.vmware.com/add-missing-fields-from-tkr: {}
+            f:spec:
+              .: {}
+              f:cni:
+                .: {}
+                f:refName: {}
+                f:valuesFrom:
+                  .: {}
+                  f:providerRef: {}
+              f:csi:
+                .: {}
+                f:refName: {}
+                f:valuesFrom:
+                  .: {}
+                  f:providerRef: {}
+              f:kapp:
+                .: {}
+                f:refName: {}
+              f:paused: {}
+          manager: crossplane-kubernetes-provider
+          operation: Update
+          time: "2024-09-08T11:42:38Z"
+        - apiVersion: run.tanzu.vmware.com/v1alpha3
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:ownerReferences:
+                .: {}
+                k:{"uid":"33cbc108-303c-42e4-9b51-b52bf8710c92"}: {}
+            f:spec:
+              f:additionalPackages: {}
+              f:cpi:
+                f:valuesFrom:
+                  .: {}
+                  f:providerRef: {}
+              f:kapp:
+                f:valuesFrom:
+                  .: {}
+                  f:providerRef: {}
+          manager: manager
+          operation: Update
+          time: "2024-09-08T11:42:43Z"
+        - apiVersion: run.tanzu.vmware.com/v1alpha3
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              .: {}
+              f:resolvedTKR: {}
+          manager: manager
+          operation: Update
+          subresource: status
+          time: "2024-09-26T06:12:12Z"
+        name: k8s-w27-s040
+        namespace: default
+        ownerReferences:
+        - apiVersion: cluster.x-k8s.io/v1beta1
+          blockOwnerDeletion: true
+          controller: true
+          kind: Cluster
+          name: k8s-w27-s040
+          uid: 33cbc108-303c-42e4-9b51-b52bf8710c92
+        resourceVersion: "342699212"
+        uid: 93016625-9791-4a3f-9291-8b854f201144
+      spec:
+        additionalPackages:
+        - refName: metrics-server.tanzu.vmware.com.0.6.2+vmware.1-tkg.3
+        - refName: secretgen-controller.tanzu.vmware.com.0.14.2+vmware.2-tkg.2
+          valuesFrom:
+            inline:
+              secretgenController:
+                securityContext:
+                  seccompProfile:
+                    type: RuntimeDefault
+        - refName: tkg-storageclass.tanzu.vmware.com.0.30.0+vmware.1
+          valuesFrom:
+            inline:
+              infraProvider: vsphere
+        - refName: pinniped.tanzu.vmware.com.0.24.0+vmware.1-tkg.1
+          valuesFrom:
+            secretRef: k8s-w27-s040-pinniped-package
+        - refName: capabilities.tanzu.vmware.com.0.30.0+vmware.1
+          valuesFrom:
+            secretRef: k8s-w27-s040-capabilities-package
+        cni:
+          refName: antrea.tanzu.vmware.com.1.11.1+vmware.4-tkg.1-advanced
+          valuesFrom:
+            providerRef:
+              apiGroup: cni.tanzu.vmware.com
+              kind: AntreaConfig
+              name: k8s-w27-s040
+        cpi:
+          refName: vsphere-cpi.tanzu.vmware.com.1.26.2+vmware.1-tkg.1
+          valuesFrom:
+            providerRef:
+              apiGroup: cpi.tanzu.vmware.com
+              kind: VSphereCPIConfig
+              name: k8s-w27-s040-vsphere-cpi-package
+        csi:
+          refName: vsphere-csi.tanzu.vmware.com.3.0.1+vmware.2-tkg.1
+          valuesFrom:
+            providerRef:
+              apiGroup: csi.tanzu.vmware.com
+              kind: VSphereCSIConfig
+              name: k8s-w27-s040
+        kapp:
+          refName: kapp-controller.tanzu.vmware.com.0.45.2+vmware.1-tkg.1
+          valuesFrom:
+            providerRef:
+              apiGroup: run.tanzu.vmware.com
+              kind: KappControllerConfig
+              name: k8s-w27-s040-kapp-controller-package
+        paused: false
+      status:
+        resolvedTKR: v1.26.5---vmware.2-tkg.1
+  conditions:
+  - lastTransitionTime: "2024-09-08T11:42:38Z"
+    reason: Available
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-11-03T09:44:38Z"
+    message: 'connect failed: cannot create new Kubernetes client: cannot create Kubernetes
+      client: the server has asked for the client to provide credentials'
+    reason: ReconcileError
+    status: "False"
+    type: Synced

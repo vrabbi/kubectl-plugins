@@ -1,0 +1,315 @@
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    crossplane.io/external-create-pending: "2024-07-08T07:56:19Z"
+    crossplane.io/external-create-succeeded: "2024-07-08T07:56:19Z"
+    crossplane.io/external-name: cna-w12-s007-rzlkw
+  creationTimestamp: "2024-07-08T07:56:19Z"
+  finalizers:
+  - finalizer.managedresource.crossplane.io
+  generateName: cna-w12-s007-
+  generation: 2
+  labels:
+    crossplane.io/claim-name: ""
+    crossplane.io/claim-namespace: ""
+    crossplane.io/composite: cna-w12-s007
+  name: cna-w12-s007-rzlkw
+  ownerReferences:
+  - apiVersion: tkg.terasky.com/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: LabCluster
+    name: cna-w12-s007
+    uid: 808392d7-2425-4307-820d-ddeaa1bea09d
+  resourceVersion: "822856931"
+  uid: fdb5168e-d5f2-406f-afc1-54ffb9b7ec45
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    manifest:
+      apiVersion: cni.tanzu.vmware.com/v1alpha1
+      kind: AntreaConfig
+      metadata:
+        name: cna-w12-s007
+        namespace: default
+      spec:
+        antrea:
+          config:
+            antreaProxy:
+              nodePortAddresses: []
+              proxyAll: false
+              proxyLoadBalancerIPs: true
+              skipServices: []
+            cloudProvider:
+              name: ""
+            disableTXChecksumOffload: false
+            disableUdpTunnelOffload: true
+            dnsServerOverride: ""
+            egress:
+              exceptCIDRs: []
+              maxEgressIPsPerNode: 255
+            enableUsageReporting: false
+            featureGates:
+              AntreaIPAM: false
+              AntreaPolicy: true
+              AntreaProxy: true
+              AntreaTraceflow: true
+              Egress: true
+              EndpointSlice: true
+              FlowExporter: false
+              L7NetworkPolicy: false
+              Multicast: false
+              Multicluster: false
+              NetworkPolicyStats: true
+              NodePortLocal: true
+              SecondaryNetwork: false
+              ServiceExternalIP: false
+              SupportBundleCollection: false
+              TopologyAwareHints: false
+              TrafficControl: false
+            flowExporter:
+              activeFlowTimeout: 60s
+              idleFlowTimeout: 15s
+              pollInterval: 5s
+            multicast:
+              igmpQueryInterval: 125s
+            multicastInterfaces: []
+            multicluster:
+              enable: false
+              enablePodToPodConnectivity: false
+              enableStretchedNetworkPolicy: false
+              namespace: ""
+            noSNAT: false
+            nodePortLocal:
+              enabled: true
+              portRange: 61000-62000
+            serviceCIDR: 100.64.0.0/13
+            trafficEncapMode: encap
+            trafficEncryptionMode: none
+            transportInterfaceCIDRs: []
+            tunnelCsum: false
+            tunnelPort: 0
+            tunnelType: geneve
+            wireGuard:
+              port: 51820
+  managementPolicy: Default
+  providerConfigRef:
+    name: mgmt-cluster
+  readiness:
+    policy: SuccessfulCreate
+status:
+  atProvider:
+    manifest:
+      apiVersion: cni.tanzu.vmware.com/v1alpha1
+      kind: AntreaConfig
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"cni.tanzu.vmware.com/v1alpha1","kind":"AntreaConfig","metadata":{"name":"cna-w12-s007","namespace":"default"},"spec":{"antrea":{"config":{"antreaProxy":{"nodePortAddresses":[],"proxyAll":false,"proxyLoadBalancerIPs":true,"skipServices":[]},"cloudProvider":{"name":""},"disableTXChecksumOffload":false,"disableUdpTunnelOffload":true,"dnsServerOverride":"","egress":{"exceptCIDRs":[],"maxEgressIPsPerNode":255},"enableUsageReporting":false,"featureGates":{"AntreaIPAM":false,"AntreaPolicy":true,"AntreaProxy":true,"AntreaTraceflow":true,"Egress":true,"EndpointSlice":true,"FlowExporter":false,"L7NetworkPolicy":false,"Multicast":false,"Multicluster":false,"NetworkPolicyStats":true,"NodePortLocal":true,"SecondaryNetwork":false,"ServiceExternalIP":false,"SupportBundleCollection":false,"TopologyAwareHints":false,"TrafficControl":false},"flowExporter":{"activeFlowTimeout":"60s","idleFlowTimeout":"15s","pollInterval":"5s"},"multicast":{"igmpQueryInterval":"125s"},"multicastInterfaces":[],"multicluster":{"enable":false,"enablePodToPodConnectivity":false,"enableStretchedNetworkPolicy":false,"namespace":""},"noSNAT":false,"nodePortLocal":{"enabled":true,"portRange":"61000-62000"},"serviceCIDR":"100.64.0.0/13","trafficEncapMode":"encap","trafficEncryptionMode":"none","transportInterfaceCIDRs":[],"tunnelCsum":false,"tunnelPort":0,"tunnelType":"geneve","wireGuard":{"port":51820}}}}}'
+        creationTimestamp: "2024-07-08T07:56:19Z"
+        generation: 1
+        labels:
+          tkg.tanzu.vmware.com/cluster-name: cna-w12-s007
+          tkg.tanzu.vmware.com/package-name: antrea.tanzu.vmware.com.1.11.1---vmware.4-tkg.1-advanced
+        managedFields:
+        - apiVersion: cni.tanzu.vmware.com/v1alpha1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/last-applied-configuration: {}
+            f:spec:
+              .: {}
+              f:antrea:
+                .: {}
+                f:config:
+                  .: {}
+                  f:antreaProxy:
+                    .: {}
+                    f:nodePortAddresses: {}
+                    f:proxyAll: {}
+                    f:proxyLoadBalancerIPs: {}
+                    f:skipServices: {}
+                  f:cloudProvider:
+                    .: {}
+                    f:name: {}
+                  f:defaultMTU: {}
+                  f:disableTXChecksumOffload: {}
+                  f:disableUdpTunnelOffload: {}
+                  f:dnsServerOverride: {}
+                  f:egress:
+                    .: {}
+                    f:exceptCIDRs: {}
+                    f:maxEgressIPsPerNode: {}
+                  f:enableBridgingMode: {}
+                  f:enableUsageReporting: {}
+                  f:featureGates:
+                    .: {}
+                    f:AntreaIPAM: {}
+                    f:AntreaPolicy: {}
+                    f:AntreaProxy: {}
+                    f:AntreaTraceflow: {}
+                    f:Egress: {}
+                    f:EndpointSlice: {}
+                    f:FlowExporter: {}
+                    f:L7NetworkPolicy: {}
+                    f:Multicast: {}
+                    f:Multicluster: {}
+                    f:NetworkPolicyStats: {}
+                    f:NodePortLocal: {}
+                    f:SecondaryNetwork: {}
+                    f:ServiceExternalIP: {}
+                    f:SupportBundleCollection: {}
+                    f:TopologyAwareHints: {}
+                    f:TrafficControl: {}
+                  f:flowExporter:
+                    .: {}
+                    f:activeFlowTimeout: {}
+                    f:idleFlowTimeout: {}
+                    f:pollInterval: {}
+                  f:multicast:
+                    .: {}
+                    f:igmpQueryInterval: {}
+                  f:multicastInterfaces: {}
+                  f:multicluster:
+                    .: {}
+                    f:enable: {}
+                    f:enablePodToPodConnectivity: {}
+                    f:enableStretchedNetworkPolicy: {}
+                    f:namespace: {}
+                  f:noSNAT: {}
+                  f:nodePortLocal:
+                    .: {}
+                    f:enabled: {}
+                    f:portRange: {}
+                  f:serviceCIDR: {}
+                  f:tlsCipherSuites: {}
+                  f:trafficEncapMode: {}
+                  f:trafficEncryptionMode: {}
+                  f:transportInterfaceCIDRs: {}
+                  f:tunnelCsum: {}
+                  f:tunnelPort: {}
+                  f:tunnelType: {}
+                  f:wireGuard:
+                    .: {}
+                    f:port: {}
+          manager: crossplane-kubernetes-provider
+          operation: Update
+          time: "2024-07-08T07:56:19Z"
+        - apiVersion: cni.tanzu.vmware.com/v1alpha1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:tkg.tanzu.vmware.com/cluster-name: {}
+                f:tkg.tanzu.vmware.com/package-name: {}
+              f:ownerReferences:
+                .: {}
+                k:{"uid":"6738d059-ffed-4824-9aa3-7bc133d24604"}: {}
+                k:{"uid":"dcb107a2-6cfb-44b5-b793-0df4ac98e2d2"}: {}
+          manager: manager
+          operation: Update
+          time: "2024-07-08T07:56:36Z"
+        - apiVersion: cni.tanzu.vmware.com/v1alpha1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              .: {}
+              f:secretRef: {}
+          manager: manager
+          operation: Update
+          subresource: status
+          time: "2024-07-08T08:00:41Z"
+        name: cna-w12-s007
+        namespace: default
+        ownerReferences:
+        - apiVersion: cluster.x-k8s.io/v1beta1
+          kind: Cluster
+          name: cna-w12-s007
+          uid: 6738d059-ffed-4824-9aa3-7bc133d24604
+        - apiVersion: run.tanzu.vmware.com/v1alpha3
+          blockOwnerDeletion: true
+          controller: true
+          kind: ClusterBootstrap
+          name: cna-w12-s007
+          uid: dcb107a2-6cfb-44b5-b793-0df4ac98e2d2
+        resourceVersion: "273861651"
+        uid: 3103c07d-6026-486d-8c4a-a9283f960fe0
+      spec:
+        antrea:
+          config:
+            antreaProxy:
+              nodePortAddresses: []
+              proxyAll: false
+              proxyLoadBalancerIPs: true
+              skipServices: []
+            cloudProvider:
+              name: ""
+            defaultMTU: ""
+            disableTXChecksumOffload: false
+            disableUdpTunnelOffload: true
+            dnsServerOverride: ""
+            egress:
+              exceptCIDRs: []
+              maxEgressIPsPerNode: 255
+            enableBridgingMode: false
+            enableUsageReporting: false
+            featureGates:
+              AntreaIPAM: false
+              AntreaPolicy: true
+              AntreaProxy: true
+              AntreaTraceflow: true
+              Egress: true
+              EndpointSlice: true
+              FlowExporter: false
+              L7NetworkPolicy: false
+              Multicast: false
+              Multicluster: false
+              NetworkPolicyStats: true
+              NodePortLocal: true
+              SecondaryNetwork: false
+              ServiceExternalIP: false
+              SupportBundleCollection: false
+              TopologyAwareHints: false
+              TrafficControl: false
+            flowExporter:
+              activeFlowTimeout: 60s
+              idleFlowTimeout: 15s
+              pollInterval: 5s
+            multicast:
+              igmpQueryInterval: 125s
+            multicastInterfaces: []
+            multicluster:
+              enable: false
+              enablePodToPodConnectivity: false
+              enableStretchedNetworkPolicy: false
+              namespace: ""
+            noSNAT: false
+            nodePortLocal:
+              enabled: true
+              portRange: 61000-62000
+            serviceCIDR: 100.64.0.0/13
+            tlsCipherSuites: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384
+            trafficEncapMode: encap
+            trafficEncryptionMode: none
+            transportInterfaceCIDRs: []
+            tunnelCsum: false
+            tunnelPort: 0
+            tunnelType: geneve
+            wireGuard:
+              port: 51820
+      status:
+        secretRef: cna-w12-s007-antrea-data-values
+  conditions:
+  - lastTransitionTime: "2024-07-08T07:56:19Z"
+    reason: Available
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-11-03T09:44:46Z"
+    message: 'connect failed: cannot create new Kubernetes client: cannot create Kubernetes
+      client: the server has asked for the client to provide credentials'
+    reason: ReconcileError
+    status: "False"
+    type: Synced

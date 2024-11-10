@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: new version v0.107.6 of support-bundle (#4192)
-      sha: d127e14dad0722ed1d76764ae90cf0c9b5526ea3
+      commitTitle: new version v1.2.3 of auth-proxy (#4205)
+      sha: 244b1f11bb7b1d4221989487bef125183fb05d8c
     path: .
   path: upstream
 kind: LockConfig

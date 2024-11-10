@@ -1,0 +1,100 @@
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    crossplane.io/external-create-pending: "2024-04-07T16:21:35Z"
+    crossplane.io/external-create-succeeded: "2024-04-07T16:21:35Z"
+    crossplane.io/external-name: k8s-w28-s004-jt6nn
+  creationTimestamp: "2024-04-07T16:21:35Z"
+  finalizers:
+  - finalizer.managedresource.crossplane.io
+  generateName: k8s-w28-s004-
+  generation: 2
+  labels:
+    crossplane.io/claim-name: ""
+    crossplane.io/claim-namespace: ""
+    crossplane.io/composite: k8s-w28-s004
+  name: k8s-w28-s004-jt6nn
+  ownerReferences:
+  - apiVersion: tap.terasky.com/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Workspace
+    name: k8s-w28-s004
+    uid: 832f4315-3d00-4989-9690-caecf35e104d
+  resourceVersion: "804412196"
+  uid: 1d21497e-71cf-4ddf-a0f1-cc9f94facce7
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    manifest:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        labels:
+          apps.tanzu.vmware.com/tap-ns: ""
+          tap.terasky.com/language: java
+        name: k8s-w28-s004
+  managementPolicy: Default
+  providerConfigRef:
+    name: build-cluster
+  readiness:
+    policy: SuccessfulCreate
+status:
+  atProvider:
+    manifest:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Namespace","metadata":{"labels":{"apps.tanzu.vmware.com/tap-ns":"","tap.terasky.com/language":"java"},"name":"k8s-w28-s004"}}'
+        creationTimestamp: "2024-04-07T16:21:35Z"
+        finalizers:
+        - namespace-provisioner.apps.tanzu.vmware.com/finalizer
+        labels:
+          apps.tanzu.vmware.com/tap-ns: ""
+          kubernetes.io/metadata.name: k8s-w28-s004
+          tap.terasky.com/language: java
+        managedFields:
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/last-applied-configuration: {}
+              f:labels:
+                .: {}
+                f:apps.tanzu.vmware.com/tap-ns: {}
+                f:kubernetes.io/metadata.name: {}
+                f:tap.terasky.com/language: {}
+          manager: crossplane-kubernetes-provider
+          operation: Update
+          time: "2024-04-07T16:21:35Z"
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:finalizers:
+                .: {}
+                v:"namespace-provisioner.apps.tanzu.vmware.com/finalizer": {}
+          manager: namespace-provisioner
+          operation: Update
+          time: "2024-04-07T16:21:35Z"
+        name: k8s-w28-s004
+        resourceVersion: "31605356"
+        uid: 5f48cb53-67eb-4654-bec7-2321566739ad
+      spec:
+        finalizers:
+        - kubernetes
+      status:
+        phase: Active
+  conditions:
+  - lastTransitionTime: "2024-04-07T16:21:35Z"
+    reason: Available
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-10-27T17:27:42Z"
+    reason: ReconcileSuccess
+    status: "True"
+    type: Synced

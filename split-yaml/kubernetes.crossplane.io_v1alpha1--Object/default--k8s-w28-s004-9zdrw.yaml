@@ -1,0 +1,109 @@
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    crossplane.io/external-create-pending: "2024-04-07T16:21:35Z"
+    crossplane.io/external-create-succeeded: "2024-04-07T16:21:35Z"
+    crossplane.io/external-name: k8s-w28-s004-9zdrw
+  creationTimestamp: "2024-04-07T16:21:35Z"
+  finalizers:
+  - finalizer.managedresource.crossplane.io
+  generateName: k8s-w28-s004-
+  generation: 2
+  labels:
+    crossplane.io/claim-name: ""
+    crossplane.io/claim-namespace: ""
+    crossplane.io/composite: k8s-w28-s004
+  name: k8s-w28-s004-9zdrw
+  ownerReferences:
+  - apiVersion: tap.terasky.com/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Workspace
+    name: k8s-w28-s004
+    uid: 832f4315-3d00-4989-9690-caecf35e104d
+  resourceVersion: "822728274"
+  uid: 5ac8ea90-d0bd-455a-bd59-e5b44373e1e9
+spec:
+  connectionDetails:
+  - apiVersion: v1
+    fieldPath: data.token
+    kind: Secret
+    name: developer-token
+    namespace: k8s-w28-s004
+    toConnectionSecretKey: iterate-token
+  deletionPolicy: Delete
+  forProvider:
+    manifest:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        annotations:
+          kubernetes.io/service-account.name: developer
+        name: developer-token
+        namespace: k8s-w28-s004
+      type: kubernetes.io/service-account-token
+  managementPolicy: Default
+  providerConfigRef:
+    name: iterate-cluster
+  readiness:
+    policy: SuccessfulCreate
+  writeConnectionSecretToRef:
+    name: k8s-w28-s004-iterate-token
+    namespace: k8s-w28
+status:
+  atProvider:
+    manifest:
+      apiVersion: v1
+      data:
+        ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM2akNDQWRLZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJME1ESXlPVEE0TVRJd05Wb1hEVE0wTURJeU5qQTRNVGN3TlZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBT0s5CkM1b3R0dFZ6ME9lMXFxclZhajMrbkluR09LMldKOWJHUmNCRXdpRkhGUTRyQ3k1YmphcUdzYW1LVWFIS2VGb08KWllEUjkwQXM1NG9wSEkxS0ZZQkpxSFVRSjdQZGpBb0xpMFVIZERNaFJ4c1Z6SCtjb2kwbGdXblZPakhXRGsxOApiSnMwWEZ2MFp2MXNwbmNSM01DaDdVQWE3S25RMGxZak1PSUE2OFdjQVpyeGNoY2kvZjFLa1k0S3F3b2RnRzU5ClJ5aHlGK3Z3U0NKZ2d3S2lMa09ZbTFrL3VmUmpHcTlsVGZoVndVUUtFbkZHeU5EdmpXWXczK0t5SWNxNk1pT2MKNmMvSjMrL0svdFdmUnVjRXIvTlNBclB6Z25QcS8xcWp0TXNVVmwyWUNzRmVLK08wN3QzckRqMjBzWU5uQXErTApjdnpoYkhzaDhVeFlrYkVHUjY4Q0F3RUFBYU5GTUVNd0RnWURWUjBQQVFIL0JBUURBZ0trTUJJR0ExVWRFd0VCCi93UUlNQVlCQWY4Q0FRQXdIUVlEVlIwT0JCWUVGS3NDa1RUR0U4TzFscEl1ZkFzMk5lb0hKZHNJTUEwR0NTcUcKU0liM0RRRUJDd1VBQTRJQkFRQ1FYVVNyZlczV1ZwMkduVG43dUhRdUtxS1hQWndJcXpJWWpBb295bko1Y3cvSQovNkdjWWRzeERKUnpFaXRKdzcvTk5oZVpNOXdmYXVyQWdjNnJHdHkzOVphVnltYngwVmlMSDNIRTQra2dYa3c4CldTaHRLdEY5SGpMMGw1anZ1Qm0rNG0vL0RJbVFYMUZXK2hPZHAxQ0UrSHYxdkgvZTFwUVdPUkJSUWFXTURMQngKcmJDT1ZSQll6a1k3Q3o3eXZYdkdJaWxORllVTEFlMmtydXBuN2JSdytuMjM2NWFGRFJuSHB0UElmRWdUQmdxZAoyKzZNSjNKV0pPSmhSNzZ2bnRrbGR4azNxTExUT1p3Z3ZtZEVCVFg2TlFVZjhkWWlIRUF4SHBrcEVyNFZyYVZECmJ3aFhLK083SDR1WUUyeEUzcGpyeVRuR3ZLclpKb25WRWxJRWhMSnMKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+        namespace: azhzLXcyOC1zMDA0
+        token: ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklqQTRVSHBzTjNwRFRuaG1SVVY0WTFKZmFEWlBkWEF6V1hGdmRETllSMWhrYkMxaVp6QXRiRGd3Ym1jaWZRLmV5SnBjM01pT2lKcmRXSmxjbTVsZEdWekwzTmxjblpwWTJWaFkyTnZkVzUwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXVZVzFsYzNCaFkyVWlPaUpyT0hNdGR6STRMWE13TURRaUxDSnJkV0psY201bGRHVnpMbWx2TDNObGNuWnBZMlZoWTJOdmRXNTBMM05sWTNKbGRDNXVZVzFsSWpvaVpHVjJaV3h2Y0dWeUxYUnZhMlZ1SWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXpaWEoyYVdObExXRmpZMjkxYm5RdWJtRnRaU0k2SW1SbGRtVnNiM0JsY2lJc0ltdDFZbVZ5Ym1WMFpYTXVhVzh2YzJWeWRtbGpaV0ZqWTI5MWJuUXZjMlZ5ZG1salpTMWhZMk52ZFc1MExuVnBaQ0k2SW1ZeU9EQmtZelpqTFRreU5EWXRORGhqTVMwNFpHWXhMVE5sTm1NMk5HVTBNamM0TXlJc0luTjFZaUk2SW5ONWMzUmxiVHB6WlhKMmFXTmxZV05qYjNWdWREcHJPSE10ZHpJNExYTXdNRFE2WkdWMlpXeHZjR1Z5SW4wLnFOWUZYMVF5ODZlV0x4Rm53dENIVjlpLWM5c3JkcnZiX1NBRExiNXBvQVZadGp0YWF6ejhkOTlTUzRiYl9zTTBBYjg5TWxsT2JDYl9IUVpoMzVTU2ZWZ3NJWnBqMERCV2c4aWt5bloxckJTWDNZZDQzREcwUXd5ZFh0MnZzYV92V2FjbnhMMGNldVF0Y3JnUndEc1pKNXUzS25qNnpFaFpzUjJfTTZTSkp1dlYtWmMxMjlrdjMyZV9BNmZPOXF5Z0RGdVRzalk2aU5KLTZpZThlVGhhaEpOcmVIUUl4WWUxd3lqaVZkWWhNem84dDdNa3BPc0lQbXppRGVyY3NZWWVxemJQTmtBajBuNXVaWnVEZGx5NG9Lc1dtX2xlSzNWVVBYbmdfTzhTNUlPWHh1NFB1cldNend4d21ELTdzVjItUWxRUkEyZEJXOVlxdngwWVNnWjNnUQ==
+      kind: Secret
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Secret","metadata":{"annotations":{"kubernetes.io/service-account.name":"developer"},"name":"developer-token","namespace":"k8s-w28-s004"},"type":"kubernetes.io/service-account-token"}'
+          kubernetes.io/service-account.name: developer
+          kubernetes.io/service-account.uid: f280dc6c-9246-48c1-8df1-3e6c64e42783
+        creationTimestamp: "2024-04-07T16:21:35Z"
+        managedFields:
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/last-applied-configuration: {}
+                f:kubernetes.io/service-account.name: {}
+            f:type: {}
+          manager: crossplane-kubernetes-provider
+          operation: Update
+          time: "2024-04-07T16:21:35Z"
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:data:
+              .: {}
+              f:ca.crt: {}
+              f:namespace: {}
+              f:token: {}
+            f:metadata:
+              f:annotations:
+                f:kubernetes.io/service-account.uid: {}
+          manager: kube-controller-manager
+          operation: Update
+          time: "2024-04-07T16:21:35Z"
+        name: developer-token
+        namespace: k8s-w28-s004
+        resourceVersion: "47839291"
+        uid: 32f91436-b758-49a2-bf65-b07a740fe278
+      type: kubernetes.io/service-account-token
+  conditions:
+  - lastTransitionTime: "2024-04-07T16:21:35Z"
+    reason: Available
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-11-03T08:46:25Z"
+    reason: ReconcileSuccess
+    status: "True"
+    type: Synced

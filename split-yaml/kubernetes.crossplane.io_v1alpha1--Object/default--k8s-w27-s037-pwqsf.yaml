@@ -1,0 +1,91 @@
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    crossplane.io/external-create-pending: "2024-07-04T07:29:55Z"
+    crossplane.io/external-create-succeeded: "2024-07-04T07:29:55Z"
+    crossplane.io/external-name: k8s-w27-s037-pwqsf
+  creationTimestamp: "2024-07-04T07:29:55Z"
+  finalizers:
+  - finalizer.managedresource.crossplane.io
+  generateName: k8s-w27-s037-
+  generation: 2
+  labels:
+    crossplane.io/claim-name: ""
+    crossplane.io/claim-namespace: ""
+    crossplane.io/composite: k8s-w27-s037
+  name: k8s-w27-s037-pwqsf
+  ownerReferences:
+  - apiVersion: tkg.terasky.com/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: LabCluster
+    name: k8s-w27-s037
+    uid: 76a08609-c2df-491f-bb4f-38ed19560d8d
+  resourceVersion: "822856704"
+  uid: 03c9a5f9-b3a5-482d-a650-d51e6c4738da
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    manifest:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: k8s-w27-s037-autoscaler-management
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-autoscaler-management
+      subjects:
+      - kind: ServiceAccount
+        name: k8s-w27-s037-autoscaler
+        namespace: default
+  managementPolicy: Default
+  providerConfigRef:
+    name: mgmt-cluster
+  readiness:
+    policy: SuccessfulCreate
+status:
+  atProvider:
+    manifest:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"name":"k8s-w27-s037-autoscaler-management"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cluster-autoscaler-management"},"subjects":[{"kind":"ServiceAccount","name":"k8s-w27-s037-autoscaler","namespace":"default"}]}'
+        creationTimestamp: "2024-07-04T07:29:55Z"
+        managedFields:
+        - apiVersion: rbac.authorization.k8s.io/v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/last-applied-configuration: {}
+            f:roleRef: {}
+            f:subjects: {}
+          manager: crossplane-kubernetes-provider
+          operation: Update
+          time: "2024-07-04T07:29:55Z"
+        name: k8s-w27-s037-autoscaler-management
+        resourceVersion: "271044877"
+        uid: ebf515bf-e084-48a2-9632-03c40faf8bd0
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-autoscaler-management
+      subjects:
+      - kind: ServiceAccount
+        name: k8s-w27-s037-autoscaler
+        namespace: default
+  conditions:
+  - lastTransitionTime: "2024-07-04T07:29:55Z"
+    reason: Available
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-11-03T09:44:40Z"
+    message: 'connect failed: cannot create new Kubernetes client: cannot create Kubernetes
+      client: the server has asked for the client to provide credentials'
+    reason: ReconcileError
+    status: "False"
+    type: Synced

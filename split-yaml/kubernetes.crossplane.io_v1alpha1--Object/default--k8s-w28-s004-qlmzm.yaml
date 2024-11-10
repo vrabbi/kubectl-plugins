@@ -1,0 +1,101 @@
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    crossplane.io/external-create-pending: "2024-04-07T16:21:36Z"
+    crossplane.io/external-create-succeeded: "2024-04-07T16:21:36Z"
+    crossplane.io/external-name: k8s-w28-s004-qlmzm
+  creationTimestamp: "2024-04-07T16:21:35Z"
+  finalizers:
+  - finalizer.managedresource.crossplane.io
+  generateName: k8s-w28-s004-
+  generation: 2
+  labels:
+    crossplane.io/claim-name: ""
+    crossplane.io/claim-namespace: ""
+    crossplane.io/composite: k8s-w28-s004
+  name: k8s-w28-s004-qlmzm
+  ownerReferences:
+  - apiVersion: tap.terasky.com/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Workspace
+    name: k8s-w28-s004
+    uid: 832f4315-3d00-4989-9690-caecf35e104d
+  resourceVersion: "822726333"
+  uid: 404147d1-506b-465b-8354-7c0d0ee1b04f
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    manifest:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: k8s-w28-s004-svctlk-access
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: app-operator-claim-class-all
+      subjects:
+      - kind: ServiceAccount
+        name: developer
+        namespace: k8s-w28-s004
+  managementPolicy: Default
+  providerConfigRef:
+    name: prod-cluster
+  readiness:
+    policy: SuccessfulCreate
+status:
+  atProvider:
+    manifest:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"name":"k8s-w28-s004-svctlk-access"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"app-operator-claim-class-all"},"subjects":[{"kind":"ServiceAccount","name":"developer","namespace":"k8s-w28-s004"}]}'
+        creationTimestamp: "2024-04-07T16:21:36Z"
+        finalizers:
+        - wrangler.cattle.io/auth-prov-v2-crb
+        managedFields:
+        - apiVersion: rbac.authorization.k8s.io/v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/last-applied-configuration: {}
+            f:roleRef: {}
+            f:subjects: {}
+          manager: crossplane-kubernetes-provider
+          operation: Update
+          time: "2024-04-07T16:21:36Z"
+        - apiVersion: rbac.authorization.k8s.io/v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:finalizers:
+                .: {}
+                v:"wrangler.cattle.io/auth-prov-v2-crb": {}
+          manager: rancher
+          operation: Update
+          time: "2024-04-07T16:21:36Z"
+        name: k8s-w28-s004-svctlk-access
+        resourceVersion: "87967141"
+        uid: c37f5407-9f8e-4549-a823-d50b90ed94f3
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: app-operator-claim-class-all
+      subjects:
+      - kind: ServiceAccount
+        name: developer
+        namespace: k8s-w28-s004
+  conditions:
+  - lastTransitionTime: "2024-04-07T16:21:38Z"
+    reason: Available
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-11-03T08:46:15Z"
+    reason: ReconcileSuccess
+    status: "True"
+    type: Synced

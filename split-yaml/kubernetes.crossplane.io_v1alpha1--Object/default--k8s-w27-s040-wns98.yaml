@@ -1,0 +1,75 @@
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    crossplane.io/external-create-pending: "2024-09-08T11:42:38Z"
+    crossplane.io/external-create-succeeded: "2024-09-08T11:42:38Z"
+    crossplane.io/external-name: k8s-w27-s040-wns98
+  creationTimestamp: "2024-09-08T11:42:38Z"
+  finalizers:
+  - finalizer.managedresource.crossplane.io
+  generateName: k8s-w27-s040-
+  generation: 2
+  labels:
+    crossplane.io/claim-name: ""
+    crossplane.io/claim-namespace: ""
+    crossplane.io/composite: k8s-w27-s040
+  name: k8s-w27-s040-wns98
+  ownerReferences:
+  - apiVersion: tkg.terasky.com/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: LabCluster
+    name: k8s-w27-s040
+    uid: a37e3aef-0c7f-42de-9be2-347a3564f8b9
+  resourceVersion: "822856796"
+  uid: cf642478-c58b-44cd-80d1-fdd8a92faa5d
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    manifest:
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: k8s-w27-s040-autoscaler
+        namespace: default
+  managementPolicy: Default
+  providerConfigRef:
+    name: mgmt-cluster
+  readiness:
+    policy: SuccessfulCreate
+status:
+  atProvider:
+    manifest:
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"ServiceAccount","metadata":{"name":"k8s-w27-s040-autoscaler","namespace":"default"}}'
+        creationTimestamp: "2024-09-08T11:42:38Z"
+        managedFields:
+        - apiVersion: v1
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/last-applied-configuration: {}
+          manager: crossplane-kubernetes-provider
+          operation: Update
+          time: "2024-09-08T11:42:38Z"
+        name: k8s-w27-s040-autoscaler
+        namespace: default
+        resourceVersion: "315471175"
+        uid: 2987bcfa-eb7b-42b0-92a5-6c8d6c3235ae
+  conditions:
+  - lastTransitionTime: "2024-09-08T11:42:38Z"
+    reason: Available
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-11-03T09:44:43Z"
+    message: 'connect failed: cannot create new Kubernetes client: cannot create Kubernetes
+      client: the server has asked for the client to provide credentials'
+    reason: ReconcileError
+    status: "False"
+    type: Synced

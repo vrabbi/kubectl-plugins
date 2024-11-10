@@ -1,0 +1,218 @@
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  annotations:
+    crossplane.io/external-create-pending: "2024-07-04T06:55:56Z"
+    crossplane.io/external-create-succeeded: "2024-07-04T06:55:56Z"
+    crossplane.io/external-name: k8s-w27-s030-hx9fc
+  creationTimestamp: "2024-07-04T06:55:41Z"
+  finalizers:
+  - finalizer.managedresource.crossplane.io
+  generateName: k8s-w27-s030-
+  generation: 2
+  labels:
+    crossplane.io/claim-name: ""
+    crossplane.io/claim-namespace: ""
+    crossplane.io/composite: k8s-w27-s030
+  name: k8s-w27-s030-hx9fc
+  ownerReferences:
+  - apiVersion: tkg.terasky.com/v1alpha1
+    blockOwnerDeletion: true
+    controller: true
+    kind: LabCluster
+    name: k8s-w27-s030
+    uid: 813a7414-30e8-46eb-b8e8-163a545ba950
+  resourceVersion: "822856791"
+  uid: a8be4966-4938-471b-911b-884dd1585544
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    manifest:
+      apiVersion: run.tanzu.vmware.com/v1alpha3
+      kind: ClusterBootstrap
+      metadata:
+        annotations:
+          tkg.tanzu.vmware.com/add-missing-fields-from-tkr: v1.26.5---vmware.2-tkg.1
+        name: k8s-w27-s030
+        namespace: default
+      spec:
+        additionalPackages:
+        - refName: metrics-server*
+        - refName: secretgen-controller*
+        - refName: pinniped*
+        cni:
+          refName: antrea*
+          valuesFrom:
+            providerRef:
+              apiGroup: cni.tanzu.vmware.com
+              kind: AntreaConfig
+              name: k8s-w27-s030
+        csi:
+          refName: vsphere-csi*
+          valuesFrom:
+            providerRef:
+              apiGroup: csi.tanzu.vmware.com
+              kind: VSphereCSIConfig
+              name: k8s-w27-s030
+        kapp:
+          refName: kapp-controller*
+  managementPolicy: Default
+  providerConfigRef:
+    name: mgmt-cluster
+  readiness:
+    policy: SuccessfulCreate
+status:
+  atProvider:
+    manifest:
+      apiVersion: run.tanzu.vmware.com/v1alpha3
+      kind: ClusterBootstrap
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"run.tanzu.vmware.com/v1alpha3","kind":"ClusterBootstrap","metadata":{"annotations":{"tkg.tanzu.vmware.com/add-missing-fields-from-tkr":"v1.26.5---vmware.2-tkg.1"},"name":"k8s-w27-s030","namespace":"default"},"spec":{"additionalPackages":[{"refName":"metrics-server*"},{"refName":"secretgen-controller*"},{"refName":"pinniped*"}],"cni":{"refName":"antrea*","valuesFrom":{"providerRef":{"apiGroup":"cni.tanzu.vmware.com","kind":"AntreaConfig","name":"k8s-w27-s030"}}},"csi":{"refName":"vsphere-csi*","valuesFrom":{"providerRef":{"apiGroup":"csi.tanzu.vmware.com","kind":"VSphereCSIConfig","name":"k8s-w27-s030"}}},"kapp":{"refName":"kapp-controller*"}}}'
+          run.tanzu.vmware.com/skip-packageinstall-deletion: ',load-balancer-and-ingress-service'
+          tkg.tanzu.vmware.com/add-missing-fields-from-tkr: v1.26.5---vmware.2-tkg.1
+        creationTimestamp: "2024-07-04T06:55:56Z"
+        finalizers:
+        - tkg.tanzu.vmware.com/addon
+        generation: 3
+        managedFields:
+        - apiVersion: run.tanzu.vmware.com/v1alpha3
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/last-applied-configuration: {}
+                f:tkg.tanzu.vmware.com/add-missing-fields-from-tkr: {}
+            f:spec:
+              .: {}
+              f:cni:
+                .: {}
+                f:refName: {}
+                f:valuesFrom:
+                  .: {}
+                  f:providerRef: {}
+              f:csi:
+                .: {}
+                f:refName: {}
+                f:valuesFrom:
+                  .: {}
+                  f:providerRef: {}
+              f:kapp:
+                .: {}
+                f:refName: {}
+              f:paused: {}
+          manager: crossplane-kubernetes-provider
+          operation: Update
+          time: "2024-07-04T06:55:56Z"
+        - apiVersion: run.tanzu.vmware.com/v1alpha3
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                f:run.tanzu.vmware.com/skip-packageinstall-deletion: {}
+              f:finalizers:
+                .: {}
+                v:"tkg.tanzu.vmware.com/addon": {}
+              f:ownerReferences:
+                .: {}
+                k:{"uid":"5d38b867-b1d6-4a45-b129-be0ff7d63456"}: {}
+            f:spec:
+              f:additionalPackages: {}
+              f:cpi:
+                f:valuesFrom:
+                  .: {}
+                  f:providerRef: {}
+              f:kapp:
+                f:valuesFrom:
+                  .: {}
+                  f:providerRef: {}
+          manager: manager
+          operation: Update
+          time: "2024-07-16T10:30:28Z"
+        - apiVersion: run.tanzu.vmware.com/v1alpha3
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              .: {}
+              f:resolvedTKR: {}
+          manager: manager
+          operation: Update
+          subresource: status
+          time: "2024-10-21T09:31:33Z"
+        name: k8s-w27-s030
+        namespace: default
+        ownerReferences:
+        - apiVersion: cluster.x-k8s.io/v1beta1
+          blockOwnerDeletion: true
+          controller: true
+          kind: Cluster
+          name: k8s-w27-s030
+          uid: 5d38b867-b1d6-4a45-b129-be0ff7d63456
+        resourceVersion: "342697991"
+        uid: 4c17a236-33f3-41b6-a73b-68c9227ce800
+      spec:
+        additionalPackages:
+        - refName: metrics-server.tanzu.vmware.com.0.6.2+vmware.1-tkg.3
+        - refName: secretgen-controller.tanzu.vmware.com.0.14.2+vmware.2-tkg.2
+          valuesFrom:
+            inline:
+              secretgenController:
+                securityContext:
+                  seccompProfile:
+                    type: RuntimeDefault
+        - refName: tkg-storageclass.tanzu.vmware.com.0.30.0+vmware.1
+          valuesFrom:
+            inline:
+              infraProvider: vsphere
+        - refName: pinniped.tanzu.vmware.com.0.24.0+vmware.1-tkg.1
+          valuesFrom:
+            secretRef: k8s-w27-s030-pinniped-package
+        - refName: capabilities.tanzu.vmware.com.0.30.0+vmware.1
+          valuesFrom:
+            secretRef: k8s-w27-s030-capabilities-package
+        - refName: load-balancer-and-ingress-service.tanzu.vmware.com.1.9.3+vmware.2-tkg.1
+          valuesFrom:
+            secretRef: k8s-w27-s030-load-balancer-and-ingress-service-addon
+        cni:
+          refName: antrea.tanzu.vmware.com.1.11.1+vmware.4-tkg.1-advanced
+          valuesFrom:
+            providerRef:
+              apiGroup: cni.tanzu.vmware.com
+              kind: AntreaConfig
+              name: k8s-w27-s030
+        cpi:
+          refName: vsphere-cpi.tanzu.vmware.com.1.26.2+vmware.1-tkg.1
+          valuesFrom:
+            providerRef:
+              apiGroup: cpi.tanzu.vmware.com
+              kind: VSphereCPIConfig
+              name: k8s-w27-s030-vsphere-cpi-package
+        csi:
+          refName: vsphere-csi.tanzu.vmware.com.3.0.1+vmware.2-tkg.1
+          valuesFrom:
+            providerRef:
+              apiGroup: csi.tanzu.vmware.com
+              kind: VSphereCSIConfig
+              name: k8s-w27-s030
+        kapp:
+          refName: kapp-controller.tanzu.vmware.com.0.45.2+vmware.1-tkg.1
+          valuesFrom:
+            providerRef:
+              apiGroup: run.tanzu.vmware.com
+              kind: KappControllerConfig
+              name: k8s-w27-s030-kapp-controller-package
+        paused: false
+      status:
+        resolvedTKR: v1.26.5---vmware.2-tkg.1
+  conditions:
+  - lastTransitionTime: "2024-07-04T06:55:57Z"
+    reason: Available
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-11-03T09:44:43Z"
+    message: 'connect failed: cannot create new Kubernetes client: cannot create Kubernetes
+      client: the server has asked for the client to provide credentials'
+    reason: ReconcileError
+    status: "False"
+    type: Synced
