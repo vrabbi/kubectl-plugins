@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: new version v1.2.3 of auth-proxy (#4205)
-      sha: 244b1f11bb7b1d4221989487bef125183fb05d8c
+      commitTitle: new version v0.7.1 of klock (#4210)
+      sha: f6ddd31b3f29a77a596426fa4cb9bee619fb2230
     path: .
   path: upstream
 kind: LockConfig

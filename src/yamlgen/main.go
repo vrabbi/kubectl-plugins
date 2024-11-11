@@ -16,7 +16,19 @@ import (
     "k8s.io/apimachinery/pkg/runtime/schema"
     "k8s.io/client-go/rest"
     "gopkg.in/yaml.v2"
+    "github.com/charmbracelet/bubbletea"
+    "golang.org/x/term"
 )
+
+type model struct {
+    crds           []string
+    cursor         int
+    selected       string
+    page           int
+    itemsPerPage   int
+    totalPages     int
+    ready          bool
+}
 
 var (
     includeOptional     bool
@@ -54,9 +66,47 @@ func main() {
     flag.Parse()
   
     if crdName == "" && filePath == "" {
-        fmt.Println("Error: a CRD must be specified. use the --help flag for more details")
-        os.Exit(1)
+        // Initialize Kubernetes client config
+        config, err := clientcmd.BuildConfigFromFlags("", clientcmd.RecommendedHomeFile)
+        if err != nil {
+            fmt.Printf("Error creating Kubernetes config: %v\n", err)
+            os.Exit(1)
+        }
+
+        // Retrieve all CRD names
+        crdNames, err := fetchAllCRDNames(config)
+        if err != nil {
+            fmt.Printf("Error retrieving CRDs: %v\n", err)
+            os.Exit(1)
+        }
+
+        // Determine terminal height and set items per page
+        terminalHeight := getTerminalHeight()
+        itemsPerPage := terminalHeight - 4 // leaving space for instructions and borders
+
+        // Calculate total pages needed for pagination
+        totalPages := (len(crdNames) + itemsPerPage - 1) / itemsPerPage
+
+        // Start Bubble Tea program
+        p := tea.NewProgram(model{
+            crds:           crdNames,
+            itemsPerPage:   itemsPerPage,
+            totalPages:     totalPages,
+        })
+        m, err := p.StartReturningModel()
+        if err != nil {
+            fmt.Println("Error starting Bubble Tea program:", err)
+            os.Exit(1)
+        }
+
+        crdName = m.(model).selected
+        if crdName == "" {
+            fmt.Println("No CRD selected.")
+            os.Exit(1)
+        }
     }
+
+    fmt.Printf("Selected CRD: %s\n", crdName)
 
     config, err := clientcmd.BuildConfigFromFlags("", clientcmd.RecommendedHomeFile)
     if err != nil {
@@ -100,6 +150,98 @@ func main() {
     yamlOutput += generateTopLevelYAML(schema, "spec", "  ", 1)
 
     fmt.Println(yamlOutput)
+}
+
+func fetchAllCRDNames(config *rest.Config) ([]string, error) {
+    dynamicClient, err := dynamic.NewForConfig(config)
+    if err != nil {
+        return nil, err
+    }
+
+    gvr := schema.GroupVersionResource{Group: "apiextensions.k8s.io", Version: "v1", Resource: "customresourcedefinitions"}
+    crdList, err := dynamicClient.Resource(gvr).List(context.TODO(), metav1.ListOptions{})
+    if err != nil {
+        return nil, err
+    }
+
+    var crdNames []string
+    for _, crd := range crdList.Items {
+        crdNames = append(crdNames, crd.GetName())
+    }
+
+    return crdNames, nil
+}
+
+func getTerminalHeight() int {
+    _, height, err := term.GetSize(int(os.Stdout.Fd()))
+    if err != nil {
+        return 20 // default to 20 lines if terminal height cannot be determined
+    }
+    return height
+}
+
+// Bubble Tea model for CRD selection with pagination
+func (m model) Init() tea.Cmd {
+    return nil
+}
+
+func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+    switch msg := msg.(type) {
+    case tea.KeyMsg:
+        switch msg.String() {
+        case "up", "k":
+            if m.cursor > 0 {
+                m.cursor--
+            }
+        case "down", "j":
+            if m.cursor < m.itemsPerPage-1 && m.cursor+m.page*m.itemsPerPage < len(m.crds)-1 {
+                m.cursor++
+            }
+        case "right", "l":
+            if m.page < m.totalPages-1 {
+                m.page++
+                m.cursor = 0
+            }
+        case "left", "h":
+            if m.page > 0 {
+                m.page--
+                m.cursor = 0
+            }
+        case "enter":
+            m.selected = m.crds[m.cursor+m.page*m.itemsPerPage]
+            m.ready = true
+            return m, tea.Quit
+        case "q", "ctrl+c":
+            m.selected = ""
+            return m, tea.Quit
+        }
+    }
+    return m, nil
+}
+
+func (m model) View() string {
+    if m.ready {
+        return fmt.Sprintf("Selected CRD: %s", m.selected)
+    }
+
+    s := fmt.Sprintf("Select a CRD to generate YAML for (Page %d/%d):\n\n", m.page+1, m.totalPages)
+
+    start := m.page * m.itemsPerPage
+    end := start + m.itemsPerPage
+    if end > len(m.crds) {
+        end = len(m.crds)
+    }
+
+    for i := start; i < end; i++ {
+        cursor := " " // no cursor
+        if i == m.cursor+start {
+            cursor = ">" // current cursor
+        }
+        s += fmt.Sprintf("%s %s\n", cursor, m.crds[i])
+    }
+
+    s += "\nUse up/down arrows to navigate, left/right to change pages, enter to select, and 'q' to quit.\n"
+    return s
 }
 
 func generateTopLevelYAML(schema map[string]interface{}, fieldName string, indent string, currentDepth int) string {
