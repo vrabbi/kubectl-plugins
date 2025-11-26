@@ -17,8 +17,11 @@ pipeline:
                   name: Echo Welcome Message
                   identifier: Echo_Welcome_Message
                   spec:
-                    shell: Sh
-                    command: echo "Welcome to Harness CI"
+                    shell: Bash
+                    command: ./release.sh $plugin $version
+                    envVariables:
+                      plugin: <+input>
+                      version: <+input>
           platform:
             os: Linux
             arch: Amd64
