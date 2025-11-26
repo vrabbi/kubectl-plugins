@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_kubectl_plugins_1764167598737-pr-trigger-input-set
+  identifier: Build_kubectl_plugins_1764167598737prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_kubectl_plugins_1764167598737
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
